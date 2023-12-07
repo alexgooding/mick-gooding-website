@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS paintings;
+DROP TABLE IF EXISTS paintings CASCADE;
 /* painting_id would be serial ideally, but since the stock number allocation
 already exists, it is a standard INT for now */
 CREATE TABLE paintings (
@@ -7,7 +7,7 @@ CREATE TABLE paintings (
     description text
 );
 
-DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS products CASCADE;
 CREATE TABLE products (
     product_id serial PRIMARY KEY,
     painting_id integer NOT NULL,
