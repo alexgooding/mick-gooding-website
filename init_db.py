@@ -1,5 +1,9 @@
+import csv
 import os
 import psycopg2
+
+
+CANVAS_PRINT_PRICE = 30.00
 
 conn = psycopg2.connect(
     host="localhost",
@@ -16,12 +20,22 @@ with open("sql/init.sql", 'r') as f:
     init_sql = f.read()
 cur.execute(init_sql)
 # Insert data into tables
-cur.execute("INSERT INTO paintings (painting_id, artist, description)"
-            "VALUES (%s, %s, %s)",
-            (1,
-             "Test Artist",
-             "Test Description")
-             )
+with open("resources/canvas_stock.csv", newline='') as csvf:
+    reader = csv.DictReader(csvf)
+    for row in reader:
+        cur.execute("INSERT INTO paintings (painting_id, artist, description)"
+                    "VALUES (%s, %s, %s)",
+                    (row['Stock Number'],
+                    row['Artist'],
+                    "")
+                )
+        cur.execute("INSERT INTO products (painting_id, product_type, price, stock)"
+                    "VALUES (%s, %s, %s, %s)",
+                    (row['Stock Number'],
+                    "Canvas Print",
+                    CANVAS_PRINT_PRICE,
+                    row['Stock'] if row['Stock'] else None)
+                )
 
 # Close database connection
 conn.commit()

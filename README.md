@@ -13,4 +13,10 @@ export DB_USERNAME=<postgres_username>
 export DB_PASSWORD=<postgres_password>
 ```
 
+Execute the Python script to initialise the database, and populate it with stock data:
+
+```
+python init_db.py
+```
+
 
