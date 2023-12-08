@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify, request
+from psycopg2.extras import RealDictCursor 
+
 from ..database import create_db_connection
 
 painting_bp = Blueprint("painting_routes", __name__)
@@ -23,14 +25,11 @@ def get_paintings():
         params.append(artist)
 
     try:
-        with conn.cursor() as cur:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
             cur.execute(query, params)
             paintings = cur.fetchall()
         
-        paintings_list = [{'painting_id': painting[0], 'artist': painting[1], 'description': painting[2]} 
-                          for painting in paintings]
-        
-        return jsonify(paintings_list)
+        return jsonify(paintings)
     
     finally:
         conn.close()
