@@ -17,11 +17,19 @@ CREATE TABLE products (
     FOREIGN KEY (painting_id) REFERENCES paintings(painting_id)
 );
 
-DROP TABLE IF EXISTS carts;
+DROP TABLE IF EXISTS carts CASCADE;
 CREATE TABLE carts (
     cart_id serial PRIMARY KEY,
     user_id integer,
+    CONSTRAINT unique_user_cart UNIQUE (user_id)
+);
+
+DROP TABLE IF EXISTS cart_products;
+CREATE TABLE cart_products (
+    cart_id integer NOT NULL,
     product_id integer NOT NULL,
     quantity integer NOT NULL,
+    PRIMARY KEY (cart_id, product_id),
+    FOREIGN KEY (cart_id) REFERENCES carts(cart_id),
     FOREIGN KEY (product_id) REFERENCES products(product_id)
 );

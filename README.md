@@ -16,6 +16,7 @@ export DB_PASSWORD=<postgres_password>
 Execute the Python script to initialise the database, and populate it with stock data:
 
 ```
+cd database
 python init_db.py
 ```
 
