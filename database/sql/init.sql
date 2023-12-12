@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS paintings CASCADE;
 already exists, it is a standard INT for now */
 CREATE TABLE paintings (
     painting_id integer PRIMARY KEY,
-    artist varchar (100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
     description text
 );
 
