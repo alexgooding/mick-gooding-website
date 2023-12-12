@@ -11,7 +11,7 @@ def get_paintings():
 
     # Extract parameters from the request, if they exist
     painting_id = request.args.get('painting_id')
-    artist = request.args.get('artist')
+    name = request.args.get('name')
 
     # Construct dynamic SQL query based on the request args
     query = "SELECT * FROM paintings WHERE 1=1"
@@ -20,9 +20,9 @@ def get_paintings():
     if painting_id:
         query += " AND painting_id = %s"
         params.append(painting_id)
-    if artist:
-        query += " AND artist = %s"
-        params.append(artist)
+    if name:
+        query += " AND name = %s"
+        params.append(name)
 
     try:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
@@ -30,6 +30,23 @@ def get_paintings():
             paintings = cur.fetchall()
         
         return jsonify(paintings)
+    
+    finally:
+        conn.close()
+
+@painting_bp.route("/painting/<int:painting_id>/products", methods=['GET'])
+def get_painting_products(painting_id):
+    conn = create_db_connection()
+
+    # Construct dynamic SQL query based on the request args
+    query = "SELECT * FROM products WHERE painting_id = %s"
+
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, (painting_id,))
+            products = cur.fetchall()
+        
+        return jsonify(products)
     
     finally:
         conn.close()
