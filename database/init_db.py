@@ -23,7 +23,7 @@ cur.execute(init_sql)
 with open("resources/canvas_stock.csv", newline='') as csvf:
     reader = csv.DictReader(csvf)
     for row in reader:
-        cur.execute("INSERT INTO paintings (painting_id, artist, description)"
+        cur.execute("INSERT INTO paintings (painting_id, name, description)"
                     "VALUES (%s, %s, %s)",
                     (row['Stock Number'],
                     row['Artist'],
