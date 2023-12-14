@@ -1,14 +1,14 @@
 import axios from "axios";
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import './App.css';
-import Painting from './Painting';
+import "./styles/App.css";
+import Painting from "./components/Painting";
+
+const client = axios.create({
+  baseURL: "http://localhost:5000/api"
+});
 
 function App() {
-  const client = axios.create({
-    baseURL: "http://localhost:5000/api"
-  });
-
   const [paintings, setPaintings] = useState([]);
 
   useEffect(() => {
@@ -16,24 +16,24 @@ function App() {
       try {
         const response = await client.get("/paintings");
         const paintingsData = response.data;
-
-        // For each painting, fetch related products
-        for (const painting of paintingsData) {
-          const productsResponse = await client.get(`/painting/${painting.painting_id}/products`);
-          const products = productsResponse.data;
-        
-          // Update paintings object dynamically for faster page load
-          setPaintings(prevPaintings => [
-            ...prevPaintings,
-            { ...painting, products }
-          ]);
-        }
-        
+  
+        // Fetch products for all paintings
+        const paintingsWithProducts = await Promise.all(
+          paintingsData.map(async (painting) => {
+            const productsResponse = await client.get(`/painting/${painting.painting_id}/products`);
+            const products = productsResponse.data;
+            return { ...painting, products };
+          })
+        );
+  
+        // Update paintings object with all paintings and their products
+        setPaintings(paintingsWithProducts);
+  
       } catch (error) {
         console.log(error);
       }
     };
-
+  
     fetchPaintings();
   }, []);
 
