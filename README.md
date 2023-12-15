@@ -32,3 +32,13 @@ python run_database_api.py
 The API should be available at http://127.0.0.1:5000/api
 
 Note: SQL queries have been chosen in preference to using Python models to keep the backend lightweight and practice SQL query construction. 
+
+## UI Setup
+The front end has been written using React. Start the service using the following code snippet:
+
+```
+cd ui
+npm start
+```
+
+The UI should be available at http://127.0.0.1:3000
