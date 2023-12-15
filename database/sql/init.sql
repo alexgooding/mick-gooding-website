@@ -17,6 +17,8 @@ CREATE TABLE products (
     FOREIGN KEY (painting_id) REFERENCES paintings(painting_id)
 );
 
+CREATE INDEX idx_painting_id ON products (painting_id);
+
 DROP TABLE IF EXISTS carts CASCADE;
 CREATE TABLE carts (
     cart_id serial PRIMARY KEY,
