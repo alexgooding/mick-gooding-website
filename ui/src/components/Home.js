@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import Painting from "./Painting";
 
@@ -10,11 +11,16 @@ const client = axios.create({
 
 const Home = () => {
   const [paintings, setPaintings] = useState([]);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const name = queryParams.get('name');
 
   useEffect(() => {
     const fetchPaintings = async () => {
       try {
-        const response = await client.get("/paintings");
+        // Modify the URL to include the 'name' parameter only if it exists
+        const url = name ? `/paintings?name=${name}` : "/paintings";
+        const response = await client.get(url);
         const paintingsData = response.data;
   
         // Fetch products for all paintings

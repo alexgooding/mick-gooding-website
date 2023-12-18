@@ -21,8 +21,8 @@ def get_paintings():
         query += " AND painting_id = %s"
         params.append(painting_id)
     if name:
-        query += " AND name = %s"
-        params.append(name)
+        query += " AND name ILIKE %s"  # ILIKE for case-insensitive matching
+        params.append(f"%{name}%")
 
     try:
         with conn.cursor(cursor_factory=RealDictCursor) as cur:
