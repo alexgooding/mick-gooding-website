@@ -1,26 +1,28 @@
 import React from "react";
 
+import "../styles/Painting.css";
+
 const Painting = ({ painting, products }) => {
   const imagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.gif`;
   const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
 
   return (
-    <div>
+    <div className="painting-container">
       <img
         src={imagePath}
         alt={`Painting: ${painting.name}`}
-        style={{ maxWidth: '100%', height: 'auto' }}
+        className="painting-image"
         onError={(e) => { e.target.src = defaultImagePath; }}
       />
       <h3>{painting.name}</h3>
-      <select id="productDropdown">
+      <select id="productDropdown" className="product-dropdown">
         {products.map((product) => (
           <option key={product.product_id} value={product.product_id}>
             {product.product_type} - £{product.price}
           </option>
         ))}
       </select>
-      <button>Add to Cart</button>
+      <button className="add-to-cart-button">Add to Cart</button>
     </div>
   );
 };
