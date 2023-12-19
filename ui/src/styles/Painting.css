@@ -1,0 +1,29 @@
+.painting-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+    height: 100%; /* Set a fixed height for each container */
+    text-align: center;
+    padding: 10px; /* Add some padding for spacing */
+  }
+  
+  .painting-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px; /* Set a maximum height for the image */
+  }
+  
+  .product-info-container {
+    margin-top: auto;
+  }
+
+  .painting-name {
+    margin-top: 10px; /* Add space below the image */
+    font-size: 1.5rem;
+  }
+
+  .product-dropdown,
+  .add-to-cart-button {
+    margin-top: 10px; /* Add space below the painting name */
+  }
+  
