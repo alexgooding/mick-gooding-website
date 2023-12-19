@@ -14,15 +14,17 @@ const Painting = ({ painting, products }) => {
         className="painting-image"
         onError={(e) => { e.target.src = defaultImagePath; }}
       />
-      <h3>{painting.name}</h3>
-      <select id="productDropdown" className="product-dropdown">
-        {products.map((product) => (
-          <option key={product.product_id} value={product.product_id}>
-            {product.product_type} - £{product.price}
-          </option>
-        ))}
-      </select>
-      <button className="add-to-cart-button">Add to Cart</button>
+      <div className="product-info-container">
+        <h3 className="painting-name">{painting.name}</h3>
+        <select id="productDropdown" className="product-dropdown">
+          {products.map((product) => (
+            <option key={product.product_id} value={product.product_id}>
+              {product.product_type} - £{product.price}
+            </option>
+          ))}
+        </select>
+        <button className="add-to-cart-button">Add to Cart</button>
+      </div>
     </div>
   );
 };
