@@ -3,7 +3,6 @@ import axios from "axios";
 import Painting from "./Painting";
 import { useLocation } from "react-router-dom";
 
-
 const client = axios.create({
   baseURL: "http://localhost:5000/api",
 });
@@ -11,7 +10,7 @@ const client = axios.create({
 const Home = () => {
   const [paintings, setPaintings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const paintingsPerPage = 9;
+  const paintingsPerPage = 15;  // Update the number of paintings per page
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const name = queryParams.get('name');
@@ -54,9 +53,9 @@ const Home = () => {
 
   return (
     <div className="container my-4">
-      <div className="row">
+      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         {currentPaintings.map((painting) => (
-          <div key={painting.painting_id} className="col-12 col-sm-6 col-md-4 mb-4 mb-lg-0">
+          <div key={painting.painting_id} className="col mb-4">
             <Painting painting={painting} products={painting.products} />
           </div>
         ))}
