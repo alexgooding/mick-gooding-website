@@ -1,29 +1,60 @@
+body.locked {
+    overflow: hidden;
+  }
+
 .painting-container {
+    position: relative;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center content horizontally */
-    height: 100%; /* Set a fixed height for each container */
+    align-items: center;
+    height: 100%;
     text-align: center;
-    padding: 10px; /* Add some padding for spacing */
+    padding: 10px;
+  }
+
+  .painting-image-container {
+    cursor: zoom-in;
+  }
+  
+  .full-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  
+  .full-screen-image {
+    max-width: 95%;
+    max-height: 95%;
+    object-fit: contain; /* Ensure the image maintains its aspect ratio and fits within the container */
   }
   
   .painting-image {
     max-width: 100%;
     height: auto;
-    max-height: 200px; /* Set a maximum height for the image */
+    max-height: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    object-fit: contain; /* Ensure the image maintains its aspect ratio and fits within the container */
   }
   
   .product-info-container {
     margin-top: auto;
   }
-
+  
   .painting-name {
-    margin-top: 10px; /* Add space below the image */
+    margin-top: 10px;
     font-size: 1.5rem;
   }
-
+  
   .product-dropdown,
   .add-to-cart-button {
-    margin-top: 10px; /* Add space below the painting name */
+    margin-top: 10px;
   }
   
