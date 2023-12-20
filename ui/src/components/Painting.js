@@ -1,19 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../styles/Painting.css";
 
 const Painting = ({ painting, products }) => {
-  const imagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.gif`;
+  const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.jpg`;
+  const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${painting.painting_id}.jpg`;
   const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
+  const [fullScreen, setFullScreen] = useState(false);
+
+  const toggleFullScreen = () => {
+    setFullScreen(!fullScreen);
+  };
 
   return (
     <div className="painting-container">
-      <img
-        src={imagePath}
-        alt={`Painting: ${painting.name}`}
-        className="painting-image"
-        onError={(e) => { e.target.src = defaultImagePath; }}
-      />
+      <div className={`painting-image-container ${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
+        <img
+          src={fullScreen ? highResImagePath : lowResImagePath}
+          alt={`Painting: ${painting.name}`}
+          className={`${fullScreen ? "full-screen-image" : "painting-image"}`}
+          onError={(e) => { e.target.src = defaultImagePath; }}
+        />
+      </div>
       <div className="product-info-container">
         <h3 className="painting-name">{painting.name}</h3>
         <select id="productDropdown" className="product-dropdown">
