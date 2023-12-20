@@ -10,6 +10,9 @@ const Painting = ({ painting, products }) => {
 
   const toggleFullScreen = () => {
     setFullScreen(!fullScreen);
+
+    // Toggle the "locked" class on the body
+    document.body.classList.toggle('locked', !fullScreen);
   };
 
   return (
