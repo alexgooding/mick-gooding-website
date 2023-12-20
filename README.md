@@ -3,6 +3,7 @@
 ## Prerequisites
 * PostgreSQL is installed, and a suitable database and user have been created
 * Python 3.11 and the dependencies from requirements.txt have been installed
+* Node.js is installed 
 
 ## Database Setup
 Ensure database name, Postgres username and password are exported as environment variables in the deployment environment. i.e.
@@ -34,11 +35,14 @@ The API should be available at http://127.0.0.1:5000/api
 Note: SQL queries have been chosen in preference to using Python models to keep the backend lightweight and practice SQL query construction. 
 
 ## UI Setup
-The front end has been written using React. Start the service using the following code snippet:
+The front end has been written using React. For first time setup, install the necessary node.js dependencies and start the service using the following code snippet:
 
 ```
 cd ui
+npm install
 npm start
 ```
+
+Note: ommit the `npm install` line beyond first time setup.
 
 The UI should be available at http://127.0.0.1:3000

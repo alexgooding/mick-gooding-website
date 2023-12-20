@@ -10,43 +10,62 @@ const client = axios.create({
 const Home = () => {
   const [paintings, setPaintings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const paintingsPerPage = 15;  // Update the number of paintings per page
+  const paintingsPerPage = 15;
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const name = queryParams.get('name');
 
+  // Function to set initial state from cached data
+  const setInitialStateFromCache = () => {
+    const cacheKey = name ? `paintings_${name}` : "paintings";
+    const cachedPaintings = localStorage.getItem(cacheKey);
+    if (cachedPaintings) {
+      setPaintings(JSON.parse(cachedPaintings));
+    }
+  };
+
+  // Function to fetch paintings and update state
+  const fetchPaintings = async () => {
+    try {
+      const url = name ? `/paintings?name=${name}` : "/paintings";
+      const response = await client.get(url);
+      const paintingsData = response.data;
+
+      const paintingsWithProducts = await Promise.all(
+        paintingsData.map(async (painting) => {
+          const productsResponse = await client.get(`/painting/${painting.painting_id}/products`);
+          const products = productsResponse.data;
+          return { ...painting, products };
+        })
+      );
+
+      // Update paintings object with all paintings and their products
+      setPaintings(paintingsWithProducts);
+
+      // Cache the paintings data in localStorage
+      const cacheKey = name ? `paintings_${name}` : "paintings";
+      localStorage.setItem(cacheKey, JSON.stringify(paintingsWithProducts));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Effect for initial render
   useEffect(() => {
-    const fetchPaintings = async () => {
-      try {
-        // Modify the URL to include the 'name' parameter only if it exists
-        const url = name ? `/paintings?name=${name}` : "/paintings";
-        const response = await client.get(url);
-        const paintingsData = response.data;
+    setInitialStateFromCache();
+  }, [name]);
 
-        // Fetch products for all paintings
-        const paintingsWithProducts = await Promise.all(
-          paintingsData.map(async (painting) => {
-            const productsResponse = await client.get(`/painting/${painting.painting_id}/products`);
-            const products = productsResponse.data;
-            return { ...painting, products };
-          })
-        );
-
-        // Update paintings object with all paintings and their products
-        setPaintings(paintingsWithProducts);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
+  // Effect for background data fetching
+  useEffect(() => {
     fetchPaintings();
   }, [name]);
+
+  // Function to handle pagination
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const indexOfLastPainting = currentPage * paintingsPerPage;
   const indexOfFirstPainting = indexOfLastPainting - paintingsPerPage;
   const currentPaintings = paintings.slice(indexOfFirstPainting, indexOfLastPainting);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const totalPages = Math.ceil(paintings.length / paintingsPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
@@ -62,7 +81,6 @@ const Home = () => {
       </div>
       {/* Page navigation bar */}
       <div className="d-flex justify-content-center mt-4">
-  
         {/* Previous button */}
         <button
           className="btn btn-outline-primary me-2"
@@ -71,7 +89,6 @@ const Home = () => {
         >
           Previous
         </button>
-  
         {/* Page buttons and ellipsis rendering */}
         {pageNumbers.map((pageNumber) => {
           if (pageNumber === 1 || pageNumber === totalPages || (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)) {
@@ -92,7 +109,6 @@ const Home = () => {
             return null;
           }
         })}
-  
         {/* Next button */}
         <button
           className="btn btn-outline-primary"
