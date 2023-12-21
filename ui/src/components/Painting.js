@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
+import { addToCart } from "./Cart";
 import "../styles/Painting.css";
 
 const Painting = ({ painting, products }) => {
@@ -15,6 +16,27 @@ const Painting = ({ painting, products }) => {
     document.body.classList.toggle('locked', !fullScreen);
   };
 
+  // store product ID for use in adding to cart
+  const [selectedProductId, setSelectedProductId] = useState("");
+
+  const handleSelect = (e) => {
+    setSelectedProductId(e.target.value)
+  };
+
+  // Run handleSelect on initial render
+  useEffect(() => {
+    handleSelect({
+      target: {
+        value: document.getElementById(`productDropdown_${painting.painting_id}`).value,
+      },
+    });
+  }, []);
+
+  const handleAddToCart = () => {
+    // Call the addToCart function here with selectedProductId and quantity
+    addToCart(selectedProductId, 1);
+  };
+
   return (
     <div className="painting-container">
       <div className={`painting-image-container ${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
@@ -27,14 +49,14 @@ const Painting = ({ painting, products }) => {
       </div>
       <div className="product-info-container">
         <h3 className="painting-name">{painting.name}</h3>
-        <select id="productDropdown" className="product-dropdown">
+        <select id={`productDropdown_${painting.painting_id}`} className="product-dropdown" onChange={handleSelect}>
           {products.map((product) => (
             <option key={product.product_id} value={product.product_id}>
               {product.product_type} - £{product.price}
             </option>
           ))}
         </select>
-        <button className="add-to-cart-button">Add to Cart</button>
+        <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>
   );
