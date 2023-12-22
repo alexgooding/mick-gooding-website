@@ -5,11 +5,12 @@ import "./styles/App.css";
 import NavBar from "./components/NavBar";
 import Home from './components/Home';
 import About from './components/About';
+import { CartProvider } from './contexts/CartContext';
 
 
 export default function App() {
   return (
-    <>
+    <CartProvider>
       <div className="App">
         <NavBar />
         <Routes>
@@ -17,6 +18,6 @@ export default function App() {
           <Route path="/about" element={<About />} />
         </Routes>
       </div>
-    </>
+    </CartProvider>
   );
 }

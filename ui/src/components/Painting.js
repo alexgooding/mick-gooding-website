@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { addToCart } from "./Cart";
+import { useCart } from "../contexts/CartContext";
 import "../styles/Painting.css";
 
 const Painting = ({ painting, products }) => {
@@ -31,6 +31,8 @@ const Painting = ({ painting, products }) => {
       },
     });
   }, []);
+
+  const { addToCart } = useCart();
 
   const handleAddToCart = () => {
     // Call the addToCart function here with selectedProductId and quantity
