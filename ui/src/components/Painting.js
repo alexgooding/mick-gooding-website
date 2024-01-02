@@ -16,11 +16,18 @@ const Painting = ({ painting, products }) => {
     document.body.classList.toggle('locked', !fullScreen);
   };
 
-  // store product ID for use in adding to cart
+  // Store product ID for use in adding to cart
   const [selectedProductId, setSelectedProductId] = useState("");
 
   const handleSelect = (e) => {
     setSelectedProductId(e.target.value)
+  };
+
+  // State for the quantity element
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityChange = (value) => {
+    setQuantity(Math.max(1, Math.min(10, value))); // Ensure quantity is between 1 and 10
   };
 
   // Run handleSelect on initial render
@@ -36,7 +43,7 @@ const Painting = ({ painting, products }) => {
 
   const handleAddToCart = () => {
     // Call the addToCart function here with selectedProductId and quantity
-    addToCart(selectedProductId, 1);
+    addToCart(selectedProductId, quantity);
   };
 
   return (
@@ -58,6 +65,38 @@ const Painting = ({ painting, products }) => {
             </option>
           ))}
         </select>
+        <div className="mx-auto quantity-elem">
+          <div className="input-group">
+              <span className="input-group-prepend">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-number"
+                  onClick={() => handleQuantityChange(quantity - 1)}
+                  disabled={quantity <= 1}
+                >
+                  <span className="fa fa-minus fa-2xs"></span>
+                </button>
+              </span>
+              <input
+                type="text"
+                className="quantity-input-box form-control input-number text-center"
+                value={quantity}
+                onChange={(e) => handleQuantityChange(e.target.value)}
+                min="1"
+                max="10"
+              />
+              <span className="input-group-append">
+                <button
+                  type="button"
+                  className="btn btn-outline-secondary btn-number"
+                  onClick={() => handleQuantityChange(quantity + 1)}
+                  disabled={quantity >= 10}
+                >
+                  <span className="fa fa-plus fa-2xs"></span>
+                </button>
+              </span>
+          </div>
+        </div>
         <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>

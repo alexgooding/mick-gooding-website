@@ -54,7 +54,24 @@ body.locked {
   }
   
   .product-dropdown,
-  .add-to-cart-button {
-    margin-top: 10px;
+  .add-to-cart-button,
+  .quantity-elem {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+  .quantity-elem {
+    max-width: 105px;
+  }
+
+  .quantity-input-box {
+    font-size: 0.75rem;
+    border: none;
+  }
+
+  .btn-number {
+    border: none;
+    background: none;
   }
   
