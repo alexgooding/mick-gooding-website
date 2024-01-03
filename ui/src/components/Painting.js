@@ -38,7 +38,7 @@ const Painting = ({ painting, products }) => {
         value: document.getElementById(`productDropdown_${painting.painting_id}`).value,
       },
     });
-  }, []);
+  }, [painting.painting_id]);
 
   const { addToCart } = useCart();
 

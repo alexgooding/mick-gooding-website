@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CiShoppingBasket } from "react-icons/ci";
 
 import { useCart } from "../contexts/CartContext";
 import SearchBar from "./SearchBar";
+import ShoppingBasket from "./ShoppingBasket";
 
 
 const NavBar = () => {
@@ -12,7 +12,7 @@ const NavBar = () => {
   const totalQuantity = getQuantityOfAllProducts();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light p-3">
       <Link to="/" className="navbar-brand">
         Mick Gooding Art
       </Link>
@@ -34,16 +34,9 @@ const NavBar = () => {
         </ul>
         <ul className="navbar-nav align-items-center ms-auto">
           <li className="nav-item">
-            <div className="container">
-                <div className="row">
-                <span className="">{totalQuantity}</span>
-              </div>
-              <div className="row">
-                <Link to="#">
-                  <CiShoppingBasket />
-                </Link>
-              </div>
-            </div>
+            <Link to="#">
+              <ShoppingBasket value={totalQuantity} className="shopping-basket"/>
+            </Link>
           </li>
         </ul>
       </div>
