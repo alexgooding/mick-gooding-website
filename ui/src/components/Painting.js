@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 import { useCart } from "../contexts/CartContext";
 import "../styles/Painting.css";
@@ -70,11 +71,11 @@ const Painting = ({ painting, products }) => {
               <span className="input-group-prepend">
                 <button
                   type="button"
-                  className="btn btn-outline-secondary btn-number"
+                  className="btn btn-number"
                   onClick={() => handleQuantityChange(quantity - 1)}
                   disabled={quantity <= 1}
                 >
-                  <span className="fa fa-minus fa-2xs"></span>
+                  <CiCircleMinus />
                 </button>
               </span>
               <input
@@ -88,11 +89,11 @@ const Painting = ({ painting, products }) => {
               <span className="input-group-append">
                 <button
                   type="button"
-                  className="btn btn-outline-secondary btn-number"
+                  className="btn btn-number"
                   onClick={() => handleQuantityChange(quantity + 1)}
                   disabled={quantity >= 10}
                 >
-                  <span className="fa fa-plus fa-2xs"></span>
+                  <CiCirclePlus />
                 </button>
               </span>
           </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { CiShoppingBasket } from "react-icons/ci";
 
 import { useCart } from "../contexts/CartContext";
 import SearchBar from "./SearchBar";
@@ -34,12 +35,12 @@ const NavBar = () => {
         <ul className="navbar-nav align-items-center ms-auto">
           <li className="nav-item">
             <div className="container">
-              <div className="row">
-                <span>{totalQuantity}</span>
+                <div className="row">
+                <span className="">{totalQuantity}</span>
               </div>
               <div className="row">
                 <Link to="#">
-                  <i className="fas fa-shopping-cart fa-lg"></i>
+                  <CiShoppingBasket />
                 </Link>
               </div>
             </div>

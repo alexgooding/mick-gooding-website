@@ -1,19 +1,23 @@
+import { IoIosSearch } from "react-icons/io";
+
+
 const SearchBar = () => (
-    <div className="input-group">
-      <div className="form-outline" data-mdb-input-init>
+      <div className="form-inline" data-mdb-input-init>
         <form action="/" method="get">
-          <input
-            type="text"
-            id="header-search"
-            placeholder="Search all items"
-            name="name"
-          />
-          <button type="submit" className="btn btn-primary" data-mdb-ripple-init>
-            <i className="fas fa-search"></i>
-          </button>
+          <div className="input-group">
+            <input
+              type="text"
+              id="header-search"
+              placeholder="Search all items"
+              name="name"
+              className="form-control"
+            />
+            <button type="submit" className="input-group-append btn btn-primary" data-mdb-ripple-init>
+              <IoIosSearch />
+            </button>
+          </div>
         </form>
       </div>
-    </div>
   );
   
   export default SearchBar;
