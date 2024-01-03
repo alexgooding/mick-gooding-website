@@ -10,6 +10,7 @@ const client = axios.create({
 const Home = () => {
   const [paintings, setPaintings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [resultsText, setResultsText] = useState("");
   const paintingsPerPage = 15;
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -27,6 +28,9 @@ const Home = () => {
   // Function to fetch paintings and update state
   const fetchPaintings = async () => {
     try {
+      // Set results text to nothing until it is determined
+      setResultsText("");
+      
       const url = name ? `/paintings?name=${name}` : "/paintings";
       const response = await client.get(url);
       const paintingsData = response.data;
@@ -45,18 +49,31 @@ const Home = () => {
       // Cache the paintings data in localStorage
       const cacheKey = name ? `paintings_${name}` : "paintings";
       localStorage.setItem(cacheKey, JSON.stringify(paintingsWithProducts));
+    
+      // Call generateResultsText after paintings have been updated
+      generateResultsText(paintingsWithProducts.length, name);
     } catch (error) {
       console.log(error);
     }
   };
 
-  // Effect for initial render
+  // Function for determining results header
+  const generateResultsText = (resultsLength, searchText) => {
+    let resultsText = "";
+
+    if (resultsLength === 0) {
+      resultsText = `No results found for '${searchText}'.`;
+    } 
+    else if (searchText) {
+      resultsText = `${resultsLength} results found for '${name}'...`;
+    }
+
+    setResultsText(resultsText);
+  };
+
+  // Effect for initial render and background data fetching
   useEffect(() => {
     setInitialStateFromCache();
-  }, [name]);
-
-  // Effect for background data fetching
-  useEffect(() => {
     fetchPaintings();
   }, [name]);
 
@@ -71,7 +88,12 @@ const Home = () => {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="container my-4">
+    <div className="container">
+      <div className="d-flex justify-content-center my-4">
+        <span>
+          {resultsText}
+        </span>
+      </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         {currentPaintings.map((painting) => (
           <div key={painting.painting_id} className="col mb-4">
