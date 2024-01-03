@@ -1,0 +1,11 @@
+.shopping-basket-container {
+  position: relative;
+}
+
+.shopping-basket-icon {
+  font-size: 2.5em;
+}
+
+.quantity-text {
+  font-size: 0.5em;
+}
