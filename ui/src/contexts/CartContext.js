@@ -32,23 +32,27 @@ export const CartProvider = ({ children }) => {
     updateCart(updatedCart);
   };
 
-  const removeFromCart = (productId, quantity) => {
+  const clearCart = () => {
+    updateCart({});
+  };
+
+  const getAllProductIds = () => {
+    let productIds = Object.keys(cart)
+    return productIds;
+  }
+
+  const setQuantityOfProduct = (productId, quantity) => {
     const updatedCart = { ...cart };
     const oldQuantity = updatedCart[productId];
     if (oldQuantity !== undefined) {
-      const newQuantity = oldQuantity - quantity;
-      if (newQuantity <= 0) {
+      if (quantity <= 0) {
         delete updatedCart[productId];
       } else {
-        updatedCart[productId] = newQuantity;
+        updatedCart[productId] = quantity;
       }
     }
 
     updateCart(updatedCart);
-  };
-
-  const clearCart = () => {
-    updateCart({});
   };
 
   const getQuantityOfProduct = (productId) => {
@@ -64,8 +68,9 @@ export const CartProvider = ({ children }) => {
       value={{
         cart,
         addToCart,
-        removeFromCart,
         clearCart,
+        getAllProductIds,
+        setQuantityOfProduct,
         getQuantityOfProduct,
         getQuantityOfAllProducts,
       }}

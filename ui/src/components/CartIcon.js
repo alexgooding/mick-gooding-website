@@ -1,15 +1,15 @@
 import { CiShoppingBasket } from "react-icons/ci";
 
-import "../styles/ShoppingBasket.css";
+import "../styles/CartIcon.css";
 
 
-const ShoppingBasket = props => {
+const CartIcon = props => {
   return (
-    <div className="shopping-basket-container">
+    <div className="shopping-cart-container">
       <span className="quantity-text position-absolute start-50 translate-middle badge rounded-pill bg-primary">{props.value}</span>
-      <CiShoppingBasket className="shopping-basket-icon"/>
+      <CiShoppingBasket className="shopping-cart-icon"/>
     </div>
   );
 };
 
-export default ShoppingBasket;
+export default CartIcon;

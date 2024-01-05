@@ -3,6 +3,7 @@ import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 
 import { useCart } from "../contexts/CartContext";
 import "../styles/Painting.css";
+import "../styles/CommonImage.css"
 
 const Painting = ({ painting, products }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.jpg`;

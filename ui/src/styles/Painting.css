@@ -13,27 +13,7 @@ body.locked {
 }
 
 .painting-image-container {
-    cursor: zoom-in;
-}
-
-.full-screen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: zoom-out;
-}
-
-.full-screen-image {
-  max-width: 95%;
-  max-height: 95%;
-  object-fit: contain; /* Ensure the image maintains its aspect ratio and fits within the container */
+  cursor: zoom-in;
 }
 
 .painting-image {
