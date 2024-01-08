@@ -12,6 +12,11 @@
   padding: 0;
 }
 
+.row {
+  padding: 0px;
+  margin: 0px;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -44,11 +44,9 @@ const Cart = () => {
           {headerText}
         </span>
       </div>
-      <div className={products.length === 0 ? "invisible" : "row row-cols-1 py-3 shadow rounded-4"}>
+      <div className={products.length === 0 ? "invisible" : "row row-cols-1 shadow rounded-4"}>
       {products.map((product) => (
-        <div className="flex-nowrap" key={product.product_id}>
-          <CartItem product={product} />
-        </div>
+        <CartItem product={product} key={product.product_id}/>
       ))}
       </div>  
     </div>
