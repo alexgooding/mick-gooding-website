@@ -88,7 +88,7 @@ const Home = () => {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="container">
+    <div className="container mb-4">
       <div className="d-flex justify-content-center my-4">
         <span>
           {resultsText}
