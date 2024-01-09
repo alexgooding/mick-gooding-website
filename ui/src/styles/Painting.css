@@ -12,10 +12,6 @@ body.locked {
   padding: 10px;
 }
 
-.painting-image-container {
-  cursor: zoom-in;
-}
-
 .painting-image {
   max-width: 100%;
   height: auto;

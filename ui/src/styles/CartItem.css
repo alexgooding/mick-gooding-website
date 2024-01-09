@@ -1,10 +1,8 @@
 .description-item {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .cart-item-image {
-  height: 150px;
-  width: 150px;
   object-fit: cover;
 }
 
