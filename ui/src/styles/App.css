@@ -2,6 +2,21 @@
   text-align: center;
 }
 
+.icon-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+}
+
+.row {
+  padding: 0px;
+  margin: 0px;
+}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -74,7 +74,7 @@ def get_all_product_info(product_id):
 
     query = """
         SELECT product_id, products.painting_id AS painting_id, product_type, 
-        price, stock, artist, description 
+        price, stock, name, description 
         FROM products 
         JOIN paintings ON products.painting_id = paintings.painting_id 
         WHERE product_id = %s

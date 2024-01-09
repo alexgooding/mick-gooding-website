@@ -5,6 +5,7 @@ import "./styles/App.css";
 import NavBar from "./components/NavBar";
 import Home from './components/Home';
 import About from './components/About';
+import Cart from './components/Cart';
 import { CartProvider } from './contexts/CartContext';
 
 
@@ -16,6 +17,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </div>
     </CartProvider>

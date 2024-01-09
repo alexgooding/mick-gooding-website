@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useCart } from "../contexts/CartContext";
 import SearchBar from "./SearchBar";
-import ShoppingBasket from "./ShoppingBasket";
+import ShoppingCartIcon from "./CartIcon";
 
 
 const NavBar = () => {
@@ -34,8 +34,8 @@ const NavBar = () => {
         </ul>
         <ul className="navbar-nav align-items-center ms-auto">
           <li className="nav-item">
-            <Link to="#">
-              <ShoppingBasket value={totalQuantity} className="shopping-basket"/>
+            <Link to="/cart">
+              <ShoppingCartIcon value={totalQuantity} className="shopping-cart"/>
             </Link>
           </li>
         </ul>

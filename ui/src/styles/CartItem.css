@@ -1,0 +1,16 @@
+.description-item {
+  margin-bottom: 5px;
+}
+
+.cart-item-image {
+  object-fit: cover;
+}
+
+.trash-icon {
+  font-size: 1.5em;
+  color: rgb(192, 27, 27);
+}
+
+.trash-icon:hover {
+  color: rgb(227, 66, 52);
+}
