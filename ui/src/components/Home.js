@@ -88,7 +88,7 @@ const Home = () => {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="container">
+    <div className="container mb-4">
       <div className="d-flex justify-content-center my-4">
         <span>
           {resultsText}
@@ -96,7 +96,7 @@ const Home = () => {
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         {currentPaintings.map((painting) => (
-          <div key={painting.painting_id} className="col mb-4">
+          <div key={painting.painting_id} className="col p-4">
             <Painting painting={painting} products={painting.products} />
           </div>
         ))}

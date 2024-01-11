@@ -2,16 +2,6 @@ body.locked {
   overflow: hidden;
 }
 
-.painting-container {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  text-align: center;
-  padding: 10px;
-}
-
 .painting-image {
   max-width: 100%;
   height: auto;
@@ -20,33 +10,6 @@ body.locked {
   object-fit: contain; /* Ensure the image maintains its aspect ratio and fits within the container */
 }
 
-.product-info-container {
-  margin-top: auto;
-}
-
-.painting-name {
-  margin-top: 10px;
-  font-size: 1.5rem;
-}
-
-.product-dropdown,
-.add-to-cart-button,
-.quantity-elem {
-  margin-top: 5px;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 .quantity-elem {
   max-width: 120px;
-}
-
-.quantity-input-box {
-  font-size: 0.75rem;
-  border: none;
-}
-
-.btn-number {
-  border: none;
-  background: none;
 }
