@@ -33,7 +33,7 @@ const CartItem = ({ product }) => {
         <div className="card border-0">
           <div className="row g-0">
             <div className="col col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4 d-flex align-items-center justify-content-center">
-              <div className={`painting-image-container ${fullScreen ? "full-screen" : "img-fluid rounded-start ratio ratio-1x1"}`} onClick={toggleFullScreen}>
+              <div className={`${fullScreen ? "full-screen" : "img-fluid rounded-start ratio ratio-1x1 zoom-in-pointer"}`} onClick={toggleFullScreen}>
                 <img
                   src={fullScreen ? highResImagePath : lowResImagePath}
                   alt={`Painting: ${product.name}`}

@@ -49,30 +49,30 @@ const Painting = ({ painting, products }) => {
   };
 
   return (
-    <div className="painting-container">
-      <div className={`painting-image-container ${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
+    <div className="d-flex flex-column h-100">
+      <div className={`${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
         <img
           src={fullScreen ? highResImagePath : lowResImagePath}
           alt={`Painting: ${painting.name}`}
-          className={`${fullScreen ? "full-screen-image" : "painting-image"}`}
+          className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
           onError={(e) => { e.target.src = defaultImagePath; }}
         />
       </div>
-      <div className="product-info-container">
-        <h3 className="painting-name">{painting.name}</h3>
-        <select id={`productDropdown_${painting.painting_id}`} className="product-dropdown" onChange={handleSelect}>
+      <div className="mt-auto">
+        <h4 className="mt-3">{painting.name}</h4>
+        <select id={`productDropdown_${painting.painting_id}`} className="mt-2" onChange={handleSelect}>
           {products.map((product) => (
             <option key={product.product_id} value={product.product_id}>
               {product.product_type} - £{product.price}
             </option>
           ))}
         </select>
-        <div className="mx-auto quantity-elem">
+        <div className="quantity-elem mt-2 mx-auto">
           <div className="input-group">
               <span className="input-group-prepend">
                 <button
                   type="button"
-                  className="btn btn-number"
+                  className="btn border-0 bg-transparent"
                   onClick={() => handleQuantityChange(quantity - 1)}
                   disabled={quantity <= 1}
                 >
@@ -81,7 +81,7 @@ const Painting = ({ painting, products }) => {
               </span>
               <input
                 type="text"
-                className="quantity-input-box form-control input-number text-center"
+                className="form-control input-number text-center border-0"
                 value={quantity}
                 onChange={(e) => handleQuantityChange(e.target.value)}
                 min="1"
@@ -90,7 +90,7 @@ const Painting = ({ painting, products }) => {
               <span className="input-group-append">
                 <button
                   type="button"
-                  className="btn btn-number"
+                  className="btn border-0 bg-transparent"
                   onClick={() => handleQuantityChange(quantity + 1)}
                   disabled={quantity >= 10}
                 >
@@ -99,7 +99,7 @@ const Painting = ({ painting, products }) => {
               </span>
           </div>
         </div>
-        <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
+        <button className="mt-2" onClick={handleAddToCart}>Add to Cart</button>
       </div>
     </div>
   );

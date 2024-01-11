@@ -96,7 +96,7 @@ const Home = () => {
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         {currentPaintings.map((painting) => (
-          <div key={painting.painting_id} className="col mb-4">
+          <div key={painting.painting_id} className="col p-4">
             <Painting painting={painting} products={painting.products} />
           </div>
         ))}
