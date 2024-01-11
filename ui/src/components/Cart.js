@@ -42,7 +42,7 @@ const Cart = () => {
 
   return (
     <div className="container mb-4">
-      <div className="row my-4">
+      <div className="row my-4 text-center">
         <span>
           {headerText}
         </span>
