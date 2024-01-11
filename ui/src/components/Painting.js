@@ -49,7 +49,7 @@ const Painting = ({ painting, products }) => {
   };
 
   return (
-    <div className="d-flex flex-column h-100">
+    <div className="d-flex flex-column h-100 text-center">
       <div className={`${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
         <img
           src={fullScreen ? highResImagePath : lowResImagePath}
