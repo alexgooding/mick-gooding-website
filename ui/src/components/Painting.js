@@ -50,11 +50,12 @@ const Painting = ({ painting, products }) => {
 
   return (
     <div className="d-flex flex-column h-100 text-center">
-      <div className={`${fullScreen ? "full-screen" : ""}`} onClick={toggleFullScreen}>
+      <div className={`${fullScreen ? "full-screen" : ""}`}>
         <img
           src={fullScreen ? highResImagePath : lowResImagePath}
           alt={`Painting: ${painting.name}`}
           className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
+          onClick={toggleFullScreen}
           onError={(e) => { e.target.src = defaultImagePath; }}
         />
       </div>
