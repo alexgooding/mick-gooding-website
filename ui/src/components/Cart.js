@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useCart } from "../contexts/CartContext";
 import CartItem from "./CartItem";
+import PaymentButtons from "./PaymentButtons";
 
 
 const client = axios.create({
@@ -109,12 +110,7 @@ const Cart = () => {
           </div>
           <div className="row">
             <div className="col">
-              <button className="payment-button btn btn-dark w-100 p-2 rounded-5" type="submit">
-                <span>
-                  Pay with&nbsp;  
-                  <img src={paypalLogoPath} width="50" />
-                </span>
-              </button>
+              <PaymentButtons customData={cartTotal + deliveryFee} />
             </div>
           </div>
         </div>

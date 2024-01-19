@@ -4,7 +4,7 @@ import Painting from "./Painting";
 import { useLocation } from "react-router-dom";
 
 const client = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 const Home = () => {

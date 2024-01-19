@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from psycopg2.extras import RealDictCursor 
 from psycopg2.errors import UniqueViolation 
 
-from ..database import create_db_connection
+from ..auth import create_db_connection
 
 cart_bp = Blueprint("cart_routes", __name__)
 
