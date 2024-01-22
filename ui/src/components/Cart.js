@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useCart } from "../contexts/CartContext";
 import CartItem from "./CartItem";
+import PaymentButtons from "./PaymentButtons";
 
 
 const client = axios.create({
@@ -10,9 +11,9 @@ const client = axios.create({
 });
 
 const Cart = () => {
-  const paypalLogoPath = `${process.env.PUBLIC_URL}/images/logos/transparent-paypal-logo.png`;
   const [products, setProducts] = useState([]);
-  const [headerText, setHeaderText] = useState("");
+  const [headerText, setHeaderText] = useState("");  
+  const [keyForPaymentButtons, setKeyForPaymentButtons] = useState(0);
   const { getAllProductIds, getQuantityOfProduct, getQuantityOfAllProducts } = useCart();
   const deliveryFee = 0;
   let cartTotal = 0;
@@ -24,12 +25,18 @@ const Cart = () => {
         const allProductInfo = await Promise.all(
           productIds.map(async (productId) => {
             const productInfoResponse = await client.get(`/product/${productId}/all-info`);
+
+            // Retrieve and add quantity to the productInfoResponse.data for checkout
+            const quantity = getQuantityOfProduct(productId);
+            productInfoResponse.data.quantity = quantity;
+
             return productInfoResponse.data;
           })
         );
 
         // Update products object with all relevant product information
         setProducts(allProductInfo);
+        setKeyForPaymentButtons((prevKey) => prevKey + 1);
         setHeaderText(`${getQuantityOfAllProducts()} items in your basket`);
       } catch (error) {
         console.log(error);
@@ -50,7 +57,7 @@ const Cart = () => {
       <div className={products.length === 0 ? "invisible" : "row"}>
         <div className="col-12 col-sm-12 col-md-8 flex-nowrap p-3 shadow rounded-4">
           {products.map((product) => {
-            cartTotal += getQuantityOfProduct(product.product_id) * product.price;
+            cartTotal += product.quantity * product.price;
 
             return <CartItem product={product} key={product.product_id}/>
           })}
@@ -109,12 +116,9 @@ const Cart = () => {
           </div>
           <div className="row">
             <div className="col">
-              <button className="payment-button btn btn-dark w-100 p-2 rounded-5" type="submit">
-                <span>
-                  Pay with&nbsp;  
-                  <img src={paypalLogoPath} width="50" />
-                </span>
-              </button>
+              {products.length > 0 && (
+                <PaymentButtons cartData={products} key={keyForPaymentButtons} />
+              )}
             </div>
           </div>
         </div>

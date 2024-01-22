@@ -6,12 +6,15 @@
 * Node.js is installed 
 
 ## Database Setup
-Ensure database name, Postgres username and password are exported as environment variables in the deployment environment. i.e.
+Ensure database name, Postgres username, password, PayPal client ID, secret and mode are exported as environment variables in the deployment environment. i.e.
 
 ```
 export DB_NAME=<database_name>
 export DB_USERNAME=<postgres_username>
 export DB_PASSWORD=<postgres_password>
+export PAYPAL_CLIENT_ID=<client_id>
+export PAYPAL_CLIENT_SECRET=<client_secret>
+export PAYPAL_CLIENT_MODE=<SANDBOX|PRODUCTION>
 ```
 
 Execute the Python script to initialise the database, and populate it with stock data:
@@ -27,7 +30,7 @@ Note: An independent Postgres database setup has been chosen, decoupling from th
 Ensure database credentials are still available in the environment. Execute the run database API script:
 
 ```
-python run_database_api.py
+python run_api.py
 ```
 
 The API should be available at http://127.0.0.1:5000/api

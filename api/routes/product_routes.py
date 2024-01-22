@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 import psycopg2
 from psycopg2.extras import RealDictCursor 
 
-from ..database import create_db_connection
+from ..auth import create_db_connection
 
 product_bp = Blueprint("product_routes", __name__)
 

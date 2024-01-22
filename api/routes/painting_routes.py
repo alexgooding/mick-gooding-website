@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from psycopg2.extras import RealDictCursor 
 
-from ..database import create_db_connection
+from ..auth import create_db_connection
 
 painting_bp = Blueprint("painting_routes", __name__)
 

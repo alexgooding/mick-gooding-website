@@ -10,7 +10,7 @@ const CartItem = ({ product }) => {
   const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${product.painting_id}.jpg`;
   const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
   const [fullScreen, setFullScreen] = useState(false);
-  const { getQuantityOfProduct, setQuantityOfProduct } = useCart();
+  const { setQuantityOfProduct } = useCart();
 
   const toggleFullScreen = () => {
     setFullScreen(!fullScreen);
@@ -20,7 +20,7 @@ const CartItem = ({ product }) => {
   };
 
   // State for the quantity element
-  const [quantity, setQuantity] = useState(getQuantityOfProduct(product.product_id));
+  const [quantity, setQuantity] = useState(product.quantity);
 
   const handleQuantityChange = (value) => {
     setQuantity(value); // Update state
