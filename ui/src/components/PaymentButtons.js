@@ -3,6 +3,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
+import { useCart } from "../contexts/CartContext";
+
+
+const currencyCode = "GBP";
+
+const initialPayPalOptions = {
+  clientId: "test",
+  currency: "GBP",
+  intent: "capture",
+};
+
 const client = axios.create({
   headers: {
     post: {
@@ -13,16 +24,9 @@ const client = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
-const currencyCode = "GBP";
-
-const initialPayPalOptions = {
-  clientId: "test",
-  currency: "GBP",
-  intent: "capture",
-};
-
 const PaymentButtons = ({ cartData }) => {
 
+  const { clearCart } = useCart();
   const navigate = useNavigate(); 
 
   const createOrder = async (data) => {
@@ -73,6 +77,7 @@ const PaymentButtons = ({ cartData }) => {
     .then((res) => {
       console.log(res.data);
       alert("Transaction completed!");
+      clearCart();
     });
   }
 
