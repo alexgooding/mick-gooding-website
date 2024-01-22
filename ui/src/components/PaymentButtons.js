@@ -6,11 +6,14 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 const client = axios.create({
   headers: {
     post: {
-      'Content-Type': "application/json"
+      'Content-Type': "application/json",
+      'Prefer': "return=representation"
     }
   },
   baseURL: process.env.REACT_APP_API_BASE_URL,
 });
+
+const currencyCode = "GBP";
 
 const initialPayPalOptions = {
   clientId: "test",
@@ -23,20 +26,46 @@ const PaymentButtons = ({ cartData }) => {
   const navigate = useNavigate(); 
 
   const createOrder = async (data) => {
-    const response = await client.post("/paypal/orders/create", 
-    {
+
+    const cartTotal = cartData.reduce((sum, product) => {
+      return sum + product.price * product.quantity;
+    }, 0);
+
+    const orderData = {
       intent: "CAPTURE",
       purchase_units: [
         {
+          items: cartData.map((product) => ({
+            name: product.name,
+            quantity: product.quantity,
+            description: product.description,
+            sku: product.product_id,
+            unit_amount: {
+              currency_code: currencyCode,
+              value: product.price
+            }
+          })),
           amount: {
-            currency_code: "GBP",
-            value: "0.01"
-          }
-        }
-      ]
-    });
+            currency_code: currencyCode,
+            value: cartTotal,
+            breakdown: {
+              item_total: {
+                currency_code: currencyCode,
+                value: cartTotal
+              },
+              shipping: {
+                currency_code: currencyCode,
+                value: 0
+              }
+            },
+          },
+        },
+      ],
+    };
 
-    return response.data
+    const response = await client.post("/paypal/orders/create", orderData);
+
+    return response.data;
   };
 
   const onApprove = async (data) => {
@@ -53,7 +82,7 @@ const PaymentButtons = ({ cartData }) => {
 
   const onError = (err) => {
     navigate("/cart");
-    alert(`The following error occured: ${err}`);
+    console.log(`The following error occured: ${err}`);
   }
 
   return (
