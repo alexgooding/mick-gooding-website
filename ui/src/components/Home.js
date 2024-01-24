@@ -34,24 +34,31 @@ const Home = () => {
       const url = name ? `/paintings?name=${name}` : "/paintings";
       const response = await client.get(url, { signal: abortController.signal });
       const paintingsData = response.data;
+      const cacheKey = name ? `paintings_${name}` : "paintings";
 
-      const paintingsWithProducts = await Promise.all(
-        paintingsData.map(async (painting) => {
-          const productsResponse = await client.get(`/painting/${painting.painting_id}/products`, { signal: abortController.signal });
-          const products = productsResponse.data;
-          return { ...painting, products };
-        })
-      );
+      // Use a temporary array to accumulate paintings with products
+      let tempPaintingsWithProducts = [];
 
-      // Update paintings object with all paintings and their products
-      setPaintings(paintingsWithProducts);
+      // Fetch and update paintings incrementally
+      for (const painting of paintingsData) {
+        const productsResponse = await client.get(`/painting/${painting.painting_id}/products`, { signal: abortController.signal });
+        const products = productsResponse.data;
+        const paintingWithProducts = { ...painting, products };
+
+        // Update state incrementally if no cached state exists to improve initial render time
+        tempPaintingsWithProducts = [...tempPaintingsWithProducts, paintingWithProducts];
+        if (localStorage.getItem(cacheKey) === null) {
+          setPaintings(tempPaintingsWithProducts);
+        }
+      }
+
+      setPaintings(tempPaintingsWithProducts);
 
       // Cache the paintings data in localStorage
-      const cacheKey = name ? `paintings_${name}` : "paintings";
-      localStorage.setItem(cacheKey, JSON.stringify(paintingsWithProducts));
-    
+      localStorage.setItem(cacheKey, JSON.stringify(tempPaintingsWithProducts));
+
       // Call generateResultsText after paintings have been updated
-      generateResultsText(paintingsWithProducts.length, name);
+      generateResultsText(tempPaintingsWithProducts.length, name);
     } catch (error) {
       console.error(error);
     }
