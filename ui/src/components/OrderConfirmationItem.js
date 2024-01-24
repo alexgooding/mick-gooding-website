@@ -1,6 +1,5 @@
 import React from "react";
 
-import "../styles/CartItem.css";
 import "../styles/CommonImage.css"
 
 const OrderConfirmationItem = ({ product }) => {
