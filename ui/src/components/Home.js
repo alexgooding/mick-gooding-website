@@ -26,18 +26,18 @@ const Home = () => {
   };
 
   // Function to fetch paintings and update state
-  const fetchPaintings = async () => {
+  const fetchPaintings = async (abortController) => {
     try {
       // Set results text to nothing until it is determined
       setResultsText("");
       
       const url = name ? `/paintings?name=${name}` : "/paintings";
-      const response = await client.get(url);
+      const response = await client.get(url, { signal: abortController.signal });
       const paintingsData = response.data;
 
       const paintingsWithProducts = await Promise.all(
         paintingsData.map(async (painting) => {
-          const productsResponse = await client.get(`/painting/${painting.painting_id}/products`);
+          const productsResponse = await client.get(`/painting/${painting.painting_id}/products`, { signal: abortController.signal });
           const products = productsResponse.data;
           return { ...painting, products };
         })
@@ -53,7 +53,7 @@ const Home = () => {
       // Call generateResultsText after paintings have been updated
       generateResultsText(paintingsWithProducts.length, name);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -73,8 +73,13 @@ const Home = () => {
 
   // Effect for initial render and background data fetching
   useEffect(() => {
+    const abortController = new AbortController();
     setInitialStateFromCache();
-    fetchPaintings();
+    fetchPaintings(abortController);
+
+    return function cleanup() {
+      abortController.abort();
+    }
   }, [name]);
 
   // Function to handle pagination
