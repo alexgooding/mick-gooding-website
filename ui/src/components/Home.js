@@ -84,7 +84,7 @@ const Home = () => {
     setInitialStateFromCache();
     fetchPaintings(abortController);
 
-    return function cleanup() {
+    return () => {
       abortController.abort();
     }
   }, [name]);
