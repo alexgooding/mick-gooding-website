@@ -84,3 +84,19 @@ def capture_order(order_id):
         response,
         status=response.status_code
     )
+
+@paypal_bp.route("/paypal/orders/<order_id>", methods=['GET'])
+@retry_on_error()
+def get_order(order_id):
+    headers = {
+        'Authorization': f"Bearer {access_token_cache}",
+        'Content-Type': "application/json",
+        'Prefer': "return=representation"
+    }
+
+    response = requests.get(f"{paypal_base_url}/v2/checkout/orders/{order_id}", headers=headers)
+
+    return Response(
+        response,
+        status=response.status_code
+    )

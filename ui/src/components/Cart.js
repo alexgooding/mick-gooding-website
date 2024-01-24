@@ -7,7 +7,7 @@ import PaymentButtons from "./PaymentButtons";
 
 
 const client = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 const Cart = () => {
