@@ -1,3 +1,11 @@
+.description-item {
+  margin-bottom: 5px;
+}
+
+.cart-item-image {
+  object-fit: cover;
+}
+
 .zoom-in-pointer {
   cursor: zoom-in;
 }

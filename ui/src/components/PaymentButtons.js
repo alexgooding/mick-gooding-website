@@ -18,7 +18,6 @@ const client = axios.create({
   headers: {
     post: {
       'Content-Type': "application/json",
-      'Prefer': "return=representation"
     }
   },
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -75,9 +74,8 @@ const PaymentButtons = ({ cartData }) => {
   const onApprove = async (data) => {
     return await client.post(`/paypal/orders/${data.orderID}/capture`)
     .then((res) => {
-      console.log(res.data);
-      alert("Transaction completed!");
       clearCart();
+      navigate(`/order/${res.data.id}`);
     });
   }
 
