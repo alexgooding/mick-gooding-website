@@ -26,14 +26,14 @@ python init_db.py
 
 Note: An independent Postgres database setup has been chosen, decoupling from the flask backend, in case the database schemas and data have to be managed separately.
 
-## Database API Setup
-Ensure database credentials are still available in the environment. Execute the run database API script:
+## API Setup
+Ensure database and paypal credentials are still available in the environment. Execute the run API script:
 
 ```
 python run_api.py
 ```
 
-The API should be available at http://127.0.0.1:5000/api
+The API should be available at http://127.0.0.1:5000/api. API documentation should be available to view at http://127.0.0.1:5000/api/swagger-ui.
 
 Note: SQL queries have been chosen in preference to using Python models to keep the backend lightweight and practice SQL query construction. 
 
