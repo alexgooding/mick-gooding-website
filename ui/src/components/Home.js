@@ -90,7 +90,10 @@ const Home = () => {
   }, [name]);
 
   // Function to handle pagination
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo(0, 0);
+  }
 
   const indexOfLastPainting = currentPage * paintingsPerPage;
   const indexOfFirstPainting = indexOfLastPainting - paintingsPerPage;
