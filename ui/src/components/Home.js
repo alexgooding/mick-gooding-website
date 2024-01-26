@@ -31,9 +31,19 @@ const Home = () => {
       // Set results text to nothing until it is determined
       setResultsText("");
       
+      // Retrieve paintings
       const url = name ? `/paintings?name=${name}` : "/paintings";
-      const response = await client.get(url, { signal: abortController.signal });
-      const paintingsData = response.data;
+      let paintingsData = [];
+      await client.get(url, { signal: abortController.signal })
+        .then((response) => {
+          paintingsData = response.data;
+        })
+        .catch((error) => {
+          if (error.response.status !== 404) {
+            throw new Error(error); 
+          }
+        });
+
       const cacheKey = name ? `paintings_${name}` : "paintings";
 
       // Use a temporary array to accumulate paintings with products

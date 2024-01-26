@@ -1,34 +1,39 @@
 from flask import jsonify, request
-from flask_restx import Namespace, Resource
+from flask_restx import Namespace, Resource, abort
 from psycopg2.extras import RealDictCursor 
 from psycopg2.errors import UniqueViolation 
 
-from ..auth import create_db_connection
+from ..decorators import create_con_handle_exceptions
+
 
 cart_ns = Namespace(__name__)
 
 @cart_ns.route("/carts")
 class Carts(Resource):
-    def get(self):
-        conn = create_db_connection()
-
+    @cart_ns.response(200, "Success")
+    @cart_ns.response(401, "Invalid database credentials")
+    @cart_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def get(self, conn):
         query = "SELECT * FROM carts"
 
-        try:
-            with conn.cursor(cursor_factory=RealDictCursor) as cur:
-                cur.execute(query)
-                carts = cur.fetchall()
-            
-            return jsonify(carts)
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query)
+            carts = cur.fetchall()
+
+        conn.close()
         
-        finally:
-            conn.close()
+        return jsonify(carts)
 
 @cart_ns.route("/user/<int:user_id>/cart/create")
 class CreateCart(Resource):
-    def post(self, user_id):
-        conn = create_db_connection()
-
+    @cart_ns.response(200, "Success")
+    @cart_ns.response(401, "Invalid database credentials")
+    @cart_ns.response(409, "Cart already exists for the user")
+    @cart_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def post(self, user_id, conn):
+        
         query = """
                 INSERT INTO carts (user_id)
                 VALUES
@@ -51,57 +56,61 @@ class CreateCart(Resource):
             return jsonify({
                 'error': f"A cart already exists for user ID {user_id}"
             }), 409
-        
-        finally:
-            conn.close()
 
 @cart_ns.route("/user/<int:user_id>/cart")
 class Cart(Resource):
-    def get(self, user_id):
-        conn = create_db_connection()
-
+    @cart_ns.response(200, "Success")
+    @cart_ns.response(401, "Invalid database credentials")
+    @cart_ns.response(404, "Cart not found")
+    @cart_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def get(self, user_id, conn):
+        
         query = "SELECT * FROM carts where user_id = %s"
 
-        try:
-            with conn.cursor(cursor_factory=RealDictCursor) as cur:
-                cur.execute(query, (user_id,))
-                cart = cur.fetchone()
-            
-            return jsonify(cart)
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, (user_id,))
+            cart = cur.fetchone()
         
-        finally:
-            conn.close()
+        if not cart:
+            abort(404, message="Cart not found")
 
+        return jsonify(cart)
+        
 @cart_ns.route("/cart/<int:cart_id>/products")
 class CartProducts(Resource):
-    def get(self, cart_id):
-        conn = create_db_connection()
-
+    @cart_ns.response(200, "Success")
+    @cart_ns.response(401, "Invalid database credentials")
+    @cart_ns.response(404, "Cart not found")
+    @cart_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def get(self, cart_id, conn): 
         query = "SELECT * FROM cart_products where cart_id = %s"
 
-        try:
-            with conn.cursor(cursor_factory=RealDictCursor) as cur:
-                cur.execute(query, (cart_id,))
-                cart_products = cur.fetchall()
-            
-            return jsonify(cart_products)
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute(query, (cart_id,))
+            cart_products = cur.fetchall()
         
-        finally:
-            conn.close() 
+        if not cart_products:
+            abort(404, message="Cart not found")
+
+        return jsonify(cart_products)
 
 @cart_ns.route("/cart/<int:cart_id>/update-quantity")
-class CartProductQuantites(Resource):
-    def post(self, cart_id):
-        conn = create_db_connection()
-
+class CartProductQuantities(Resource):
+    @cart_ns.expect(cart_ns.parser())
+    @cart_ns.response(200, "Success")
+    @cart_ns.response(400, "'product_id' or 'quantity' missing from request body")
+    @cart_ns.response(401, "Invalid database credentials")
+    @cart_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def post(self, cart_id, conn):
         # Retrieve and validate request body parameters
         product_id = request.args.get('product_id')
         quantity = request.args.get('quantity')
 
         if product_id is None or quantity is None:
-            return jsonify({
-                'error': "'product_id' or 'quantity' are missing from request body"
-            }), 400
+            abort(400, message="'product_id' or 'quantity' missing from request body")
 
         query = """
             INSERT INTO cart_products (cart_id, product_id, quantity)
@@ -111,15 +120,11 @@ class CartProductQuantites(Resource):
             DO UPDATE SET quantity = EXCLUDED.quantity;
         """
 
-        try:
-            with conn.cursor() as cur:
-                cur.execute(query, (cart_id, product_id, quantity))
+        with conn.cursor() as cur:
+            cur.execute(query, (cart_id, product_id, quantity))
 
-            conn.commit()
-            
-            return jsonify({
-                'message': f"Quantity updated for product ID {product_id} in cart ID {cart_id}"
-            })
+        conn.commit()
         
-        finally:
-            conn.close() 
+        return jsonify({
+            'message': f"Quantity updated for product ID {product_id} in cart ID {cart_id}"
+        })
