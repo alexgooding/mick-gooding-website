@@ -40,6 +40,13 @@ def retry_on_error(max_retries=3, retry_codes=[400, 401]):
 
 @paypal_ns.route("/paypal/user-info")
 class UserInfo(Resource):
+    @paypal_ns.doc(description=
+    """
+    Retrieves information about the authenticated user from PayPal.
+    For detailed information on the response structure and status codes,
+    refer to the [PayPal Identity API documentation](https://developer.paypal.com/docs/api/identity/v1/#userinfo_get).
+    """
+    )
     @retry_on_error()
     def get(self):
         headers = {
@@ -57,6 +64,12 @@ class UserInfo(Resource):
     
 @paypal_ns.route("/paypal/orders/create")
 class OrderCreate(Resource):
+    @paypal_ns.doc(description=
+    """
+    Creates a new PayPal order.
+    For detailed information on the request payload, response structure, and status codes,
+    refer to the [PayPal Orders API documentation](https://developer.paypal.com/docs/api/orders/v2/).
+    """)
     @retry_on_error()
     def post(self):
         headers = {
@@ -75,6 +88,12 @@ class OrderCreate(Resource):
 
 @paypal_ns.route("/paypal/orders/<order_id>/capture")
 class OrderCapture(Resource):
+    @paypal_ns.doc(description=
+    """
+    Captures an existing PayPal order.
+    For detailed information on the request payload, response structure, and status codes,
+    refer to the [PayPal Orders API documentation](https://developer.paypal.com/docs/api/orders/v2/).
+    """)
     @retry_on_error()
     def post(self, order_id):
         headers = {
@@ -91,6 +110,12 @@ class OrderCapture(Resource):
 
 @paypal_ns.route("/paypal/orders/<order_id>")
 class Order(Resource):
+    @paypal_ns.doc(description=
+    """
+    Retrieves an existing PayPal order.
+    For detailed information on the response structure, and status codes,
+    refer to the [PayPal Orders API documentation](https://developer.paypal.com/docs/api/orders/v2/).
+    """)
     @retry_on_error()
     def get(self, order_id):
         headers = {
