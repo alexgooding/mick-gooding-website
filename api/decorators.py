@@ -1,5 +1,5 @@
 from flask_restx import abort
-from werkzeug.exceptions import HTTPException
+from werkzeug.exceptions import HTTPException, NotFound
 from functools import wraps
 from psycopg2 import OperationalError
 
@@ -16,6 +16,9 @@ def create_con_handle_exceptions(func):
             return func(*args, conn=conn, **kwargs)
         except OperationalError as e:
             abort(401, message={e})
+        except NotFound as e:
+            message = e.data.get('message')
+            abort(e.code, message=message)
         except HTTPException as e:
             abort(e.code, message=e.description)
         except Exception as e:
