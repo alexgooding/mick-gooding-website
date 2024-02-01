@@ -37,6 +37,12 @@ The API should be available at http://127.0.0.1:5000/api. API documentation shou
 
 Note: SQL queries have been chosen in preference to using Python models to keep the backend lightweight and practice SQL query construction. 
 
+To execute unit tests for the API, run the following:
+
+```
+pytest
+```
+
 ## UI Setup
 The front end has been written using React. For first time setup, install the necessary node.js dependencies and start the service using the following code snippet:
 

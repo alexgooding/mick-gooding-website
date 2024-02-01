@@ -29,6 +29,6 @@ def generate_paypal_access_token():
     }   
     auth = (os.environ['PAYPAL_CLIENT_ID'], os.environ['PAYPAL_CLIENT_SECRET'])
     
-    response = requests.post(url, headers=headers, data=data, auth=auth)
+    response = requests.post(url=url, headers=headers, data=data, auth=auth)
     
     return response.json()['access_token']

@@ -9,7 +9,8 @@ from ..auth import generate_paypal_access_token
 
 PAYPAL_SANDBOX_BASE_URL = "https://api-m.sandbox.paypal.com"
 PAYPAL_PRODUCTION_BASE_URL = "https://api-m.paypal.com"
-paypal_base_url = PAYPAL_SANDBOX_BASE_URL if os.environ['PAYPAL_CLIENT_MODE'] == "SANDBOX" else PAYPAL_PRODUCTION_BASE_URL
+paypal_client_mode = os.environ.get('PAYPAL_CLIENT_MODE', "SANDBOX")
+paypal_base_url = PAYPAL_SANDBOX_BASE_URL if paypal_client_mode == "SANDBOX" else PAYPAL_PRODUCTION_BASE_URL
 access_token_cache = ""
 
 paypal_ns = Namespace(__name__)
@@ -37,30 +38,6 @@ def retry_on_error(max_retries=3, retry_codes=[400, 401]):
         return wrapper
 
     return decorator
-
-@paypal_ns.route("/paypal/user-info")
-class UserInfo(Resource):
-    @paypal_ns.doc(description=
-    """
-    Retrieves information about the authenticated user from PayPal.
-    For detailed information on the response structure and status codes,
-    refer to the [PayPal Identity API documentation](https://developer.paypal.com/docs/api/identity/v1/#userinfo_get).
-    """
-    )
-    @retry_on_error()
-    def get(self):
-        headers = {
-            'Authorization': f"Bearer {access_token_cache}",
-            'Content-Type': "application/x-www-form-urlencoded",
-        }
-        params = {'schema': "openid"}
-
-        response = requests.get(f"{paypal_base_url}/v1/identity/openidconnect/userinfo", headers=headers, params=params)
-        
-        return Response(
-            response.text,
-            status=response.status_code
-        )
     
 @paypal_ns.route("/paypal/orders/create")
 class OrderCreate(Resource):
