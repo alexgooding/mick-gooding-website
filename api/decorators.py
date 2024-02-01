@@ -17,7 +17,9 @@ def create_con_handle_exceptions(func):
         except OperationalError as e:
             abort(401, message={e})
         except NotFound as e:
-            message = e.data.get('message')
+            message = e.description
+            if hasattr(e, 'data'):
+              message = e.data.get('message')
             abort(e.code, message=message)
         except HTTPException as e:
             abort(e.code, message=e.description)
