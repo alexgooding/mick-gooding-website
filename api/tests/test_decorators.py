@@ -4,14 +4,14 @@ from flask import Flask
 from flask_restx import Api, Resource
 from werkzeug.exceptions import NotFound
 from psycopg2 import OperationalError
-from api.decorators import create_con_handle_exceptions
+from decorators import create_con_handle_exceptions
 
 @pytest.fixture
 def flask_app_client():
     app = Flask(__name__)
     api = Api(app)
 
-    return app, api, app.test_client()
+    return api, app.test_client()
 
 # Wrapper function to simulate Flask-Restx resource class
 def wrap_route(func):
@@ -23,9 +23,9 @@ def wrap_route(func):
     return DummyResource
 
 def test_create_con_handle_exceptions_success(flask_app_client):
-    app, api, client = flask_app_client
+    api, client = flask_app_client
 
-    with patch('api.decorators.create_db_connection') as mock_create_db_connection:
+    with patch('decorators.create_db_connection') as mock_create_db_connection:
         mock_conn = MagicMock()
         mock_create_db_connection.return_value = mock_conn
 
@@ -44,9 +44,9 @@ def test_create_con_handle_exceptions_success(flask_app_client):
 
 
 def test_create_con_handle_exceptions_operational_error(flask_app_client):
-    app, api, client = flask_app_client
+    api, client = flask_app_client
 
-    with patch('api.decorators.create_db_connection') as mock_create_db_connection:
+    with patch('decorators.create_db_connection') as mock_create_db_connection:
         mock_create_db_connection.side_effect = OperationalError("Mocked OperationalError")
 
         class DummyResource(Resource):
@@ -63,9 +63,9 @@ def test_create_con_handle_exceptions_operational_error(flask_app_client):
 
 
 def test_create_con_handle_exceptions_not_found(flask_app_client):
-    app, api, client = flask_app_client
+    api, client = flask_app_client
 
-    with patch('api.decorators.create_db_connection') as mock_create_db_connection:
+    with patch('decorators.create_db_connection') as mock_create_db_connection:
         class DummyResource(Resource):
             @create_con_handle_exceptions
             def get(self, conn):
@@ -80,9 +80,9 @@ def test_create_con_handle_exceptions_not_found(flask_app_client):
 
 
 def test_create_con_handle_exceptions_internal_server_error(flask_app_client):
-    app, api, client = flask_app_client
+    api, client = flask_app_client
 
-    with patch('api.decorators.create_db_connection') as mock_create_db_connection:
+    with patch('decorators.create_db_connection') as mock_create_db_connection:
         class DummyResource(Resource):
             @create_con_handle_exceptions
             def get(self, conn):

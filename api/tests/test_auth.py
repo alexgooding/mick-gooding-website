@@ -1,7 +1,7 @@
 import os
 from unittest.mock import patch, MagicMock
 import pytest
-from api.auth import create_db_connection, generate_paypal_access_token
+from auth import create_db_connection, generate_paypal_access_token
 
 @pytest.mark.parametrize("db_env_variables, expected_conn_params", [
     (

@@ -1,10 +1,9 @@
-import os
 import json
 import pytest
 from flask import Flask
 from unittest.mock import patch
-from api.routes import api as base_api
-from api.routes.paypal_routes import paypal_ns
+from routes import api as base_api
+from routes.paypal_routes import paypal_ns
 
 
 @pytest.fixture
@@ -24,7 +23,7 @@ def client(app):
     return app.test_client()
 
 
-@patch('api.auth.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.auth.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.post')
 def test_order_create_success(mock_post, mock_generate_token, client):
     mock_post.return_value.status_code = 201
@@ -37,7 +36,7 @@ def test_order_create_success(mock_post, mock_generate_token, client):
     assert response.data.decode('utf-8') == 'mocked_order_id'
 
 
-@patch('api.routes.paypal_routes.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.routes.paypal_routes.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.post')
 def test_order_create_failure(mock_post, mock_generate_token, client):
     mock_post.return_value.status_code = 400
@@ -48,7 +47,7 @@ def test_order_create_failure(mock_post, mock_generate_token, client):
     assert response.status_code == 400
 
 
-@patch('api.auth.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.auth.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.post')
 def test_order_capture_success(mock_post, mock_generate_token, client):
     mock_post.return_value.status_code = 200
@@ -59,7 +58,7 @@ def test_order_capture_success(mock_post, mock_generate_token, client):
     assert response.status_code == 200
 
 
-@patch('api.auth.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.auth.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.post')
 def test_order_capture_failure(mock_post, mock_generate_token, client):
     mock_post.return_value.status_code = 401
@@ -70,7 +69,7 @@ def test_order_capture_failure(mock_post, mock_generate_token, client):
     assert response.status_code == 401
 
 
-@patch('api.auth.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.auth.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.get')
 def test_order_get_success(mock_get, mock_generate_token, client):
     mock_get.return_value.status_code = 200
@@ -80,7 +79,7 @@ def test_order_get_success(mock_get, mock_generate_token, client):
     assert response.status_code == 200
 
 
-@patch('api.routes.paypal_routes.generate_paypal_access_token', return_value='mocked_access_token')
+@patch('src.routes.paypal_routes.generate_paypal_access_token', return_value='mocked_access_token')
 @patch('requests.get')
 def test_order_get_failure(mock_get, mock_generate_token, client):
     mock_get.return_value.status_code = 404
