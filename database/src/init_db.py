@@ -8,9 +8,9 @@ CANVAS_PRINT_PRICE = 30.00
 conn = psycopg2.connect(
     host="localhost",
     port="5432",
-    database=os.environ['DB_NAME'],
-    user=os.environ['DB_USERNAME'],
-    password=os.environ['DB_PASSWORD']
+    database=os.environ['POSTGRES_DB'],
+    user=os.environ['POSTGRES_USER'],
+    password=os.environ['POSTGRES_PASSWORD']
 )
 
 cur = conn.cursor()

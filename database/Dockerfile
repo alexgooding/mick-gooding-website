@@ -8,6 +8,3 @@ ENV POSTGRES_PASSWORD=admin
 
 # Copy DB init scripts
 COPY src/sql/ /docker-entrypoint-initdb.d/
-
-# Expose the PostgreSQL port for container to container communication
-EXPOSE 5432

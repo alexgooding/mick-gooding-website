@@ -9,11 +9,11 @@ PAYPAL_PRODUCTION_BASE_URL = "https://api-m.paypal.com"
 
 def create_db_connection():
     conn = psycopg2.connect(
-        host="localhost",
+        host="database",
         port="5432",
-        database=os.environ['DB_NAME'],
-        user=os.environ['DB_USERNAME'],
-        password=os.environ['DB_PASSWORD']
+        database=os.environ['POSTGRES_DB'],
+        user=os.environ['POSTGRES_USER'],
+        password=os.environ['POSTGRES_PASSWORD']
     )
 
     return conn

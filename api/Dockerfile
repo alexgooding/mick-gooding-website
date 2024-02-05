@@ -30,16 +30,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Set environment variables (override at runtime)
-ENV DB_NAME=""
-ENV DB_USERNAME=""
-ENV DB_PASSWORD=""
+ENV POSTGRES_DB=""
+ENV POSTGRES_USER=""
+ENV POSTGRES_PASSWORD=""
 ENV PAYPAL_CLIENT_ID=""
 ENV PAYPAL_CLIENT_SECRET=""
 ENV PAYPAL_CLIENT_MODE=""
 
-# Expose on port 5000 for container to container communication
-EXPOSE 5000
-
 # Set the command to run the application
 CMD ["python", "src/run_api.py"]
-
