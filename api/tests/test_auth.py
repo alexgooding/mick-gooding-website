@@ -1,13 +1,13 @@
 import os
 from unittest.mock import patch, MagicMock
 import pytest
-from api.auth import create_db_connection, generate_paypal_access_token
+from auth import create_db_connection, generate_paypal_access_token
 
 @pytest.mark.parametrize("db_env_variables, expected_conn_params", [
     (
-        {'DB_NAME': 'test_db', 'DB_USERNAME': 'test_user', 'DB_PASSWORD': 'test_password'},
+        {'POSTGRES_DB': 'test_db', 'POSTGRES_USER': 'test_user', 'POSTGRES_PASSWORD': 'test_password'},
         {
-            'host': 'localhost',
+            'host': 'database',
             'port': '5432',
             'database': 'test_db',
             'user': 'test_user',
@@ -32,15 +32,15 @@ def test_create_db_connection(db_env_variables, expected_conn_params):
             mock_connect.assert_called_once_with(**expected_conn_params)
 
 @pytest.mark.parametrize("missing_env_variables", [
-    {'DB_USERNAME': 'test_user', 'DB_PASSWORD': 'test_password'},
-    {'DB_NAME': 'test_db', 'DB_PASSWORD': 'test_password'},
-    {'DB_NAME': 'test_db', 'DB_USERNAME': 'test_user'},
+    {'POSTGRES_USER': 'test_user', 'POSTGRES_PASSWORD': 'test_password'},
+    {'POSTGRES_DB': 'test_db', 'POSTGRES_PASSWORD': 'test_password'},
+    {'POSTGRES_DB': 'test_db', 'POSTGRES_USER': 'test_user'},
     {},
 ])
 def test_create_db_connection_missing_env_variables(missing_env_variables):
     with patch.dict(os.environ, missing_env_variables):
         with pytest.raises(KeyError):
-            # The following line should raise a KeyError since DB_NAME is not defined in os.environ
+            # The following line should raise a KeyError since POSTGRES_DB is not defined in os.environ
             create_db_connection()
 
 @pytest.mark.parametrize("paypal_env_variables, expected_post_params", [

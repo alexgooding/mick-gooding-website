@@ -1,0 +1,34 @@
+services:
+  database:
+    build: ./database
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+
+  backend:
+    build: ./api
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+      - PAYPAL_CLIENT_MODE=${PAYPAL_CLIENT_MODE}
+    ports:
+    - 5000:5000
+    volumes:
+      - ./api:/app
+  
+  frontend:
+    build: ./ui
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - WATCHPACK_POLLING=true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./ui:/app
+    

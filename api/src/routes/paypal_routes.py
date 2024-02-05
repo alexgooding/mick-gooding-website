@@ -4,7 +4,7 @@ from flask_restx import Namespace, Resource
 from functools import wraps
 import requests
 
-from ..auth import generate_paypal_access_token
+from auth import generate_paypal_access_token
 
 
 PAYPAL_SANDBOX_BASE_URL = "https://api-m.sandbox.paypal.com"

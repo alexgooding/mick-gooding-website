@@ -3,7 +3,7 @@ from werkzeug.exceptions import HTTPException, NotFound
 from functools import wraps
 from psycopg2 import OperationalError
 
-from .auth import create_db_connection
+from auth import create_db_connection
 
 
 def create_con_handle_exceptions(func):

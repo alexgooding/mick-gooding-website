@@ -1,8 +1,7 @@
-from api import create_base_app
-from api.api import create_api
+from api import create_base_app, create_api
 
 if __name__ == "__main__":
     app = create_base_app()
     api = create_api(app)
     
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)

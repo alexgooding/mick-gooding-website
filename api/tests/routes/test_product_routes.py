@@ -4,8 +4,8 @@ from functools import wraps
 from unittest.mock import patch, MagicMock
 from psycopg2 import OperationalError
 
-from api.routes import api as base_api
-from api.routes.product_routes import product_ns
+from routes import api as base_api
+from routes.product_routes import product_ns
 
 
 @pytest.fixture
@@ -29,7 +29,7 @@ def mock_db_operations(data, exception=None):
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
-            with patch('api.decorators.create_db_connection') as mock_db_connection:
+            with patch('decorators.create_db_connection') as mock_db_connection:
                 mock_db_connection.return_value = MagicMock()
 
                 if exception:

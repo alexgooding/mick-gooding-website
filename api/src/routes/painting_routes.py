@@ -2,7 +2,7 @@ from flask import jsonify, request
 from flask_restx import Namespace, Resource, abort
 from psycopg2.extras import RealDictCursor 
 
-from ..decorators import create_con_handle_exceptions
+from decorators import create_con_handle_exceptions
 
 
 painting_ns = Namespace(__name__)
