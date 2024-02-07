@@ -9,6 +9,7 @@ const NavBar = () => {
   const { getQuantityOfAllProducts } = useCart();
   const totalQuantity = getQuantityOfAllProducts();
   const [navbarCollapsed, setNavbarCollapsed] = useState(true);
+  const navbarBrandLogo = `${process.env.PUBLIC_URL}/images/logos/mick_sig_1.png`
   let cartCollapse = null;
   let cartNav = null;
 
@@ -52,8 +53,8 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand">
-          Mick Gooding Art
+        <Link to="/" className="navbar-brand m-0">
+          <img src={navbarBrandLogo} alt="Mick Signature Logo" height="45" />
         </Link>
         <button
           className="navbar-toggler border-0"
