@@ -136,7 +136,7 @@ const Home = () => {
       <div className="d-flex justify-content-center mt-4">
         {/* Previous button */}
         <button
-          className="btn btn-outline-primary me-2"
+          className="btn btn-outline-dark btn-xs me-2"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -148,7 +148,7 @@ const Home = () => {
             return (
               <button
                 key={pageNumber}
-                className={`btn ${currentPage === pageNumber ? 'btn-primary' : 'btn-outline-primary'} me-2`}
+                className={`btn btn-xs ${currentPage === pageNumber ? 'btn-dark' : 'btn-outline-dark'} me-2`}
                 onClick={() => paginate(pageNumber)}
               >
                 {pageNumber}
@@ -164,7 +164,7 @@ const Home = () => {
         })}
         {/* Next button */}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-dark btn-xs"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
