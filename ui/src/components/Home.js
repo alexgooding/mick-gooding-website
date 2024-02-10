@@ -137,7 +137,7 @@ const Home = () => {
         {/* Previous button */}
         <button
           className="btn btn-outline-dark btn-xs me-2"
-          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          onClick={() => paginate((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
           Previous
@@ -165,7 +165,7 @@ const Home = () => {
         {/* Next button */}
         <button
           className="btn btn-outline-dark btn-xs"
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() => paginate((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
           Next
