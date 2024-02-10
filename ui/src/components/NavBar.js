@@ -8,7 +8,7 @@ import ShoppingCartIcon from "./CartIcon";
 const NavBar = () => {
   const { getQuantityOfAllProducts } = useCart();
   const totalQuantity = getQuantityOfAllProducts();
-  const [navbarCollapsed, setNavbarCollapsed] = useState(true);
+  const [navbarCollapsed, setNavbarCollapsed] = useState(window.innerWidth < 992);
   const navbarBrandLogo = `${process.env.PUBLIC_URL}/images/logos/mick_sig_1.png`
   let cartCollapse = null;
   let cartNav = null;
@@ -29,11 +29,17 @@ const NavBar = () => {
     };
   }, []);
 
+  // A method to collapse the navbar dropdown in collapsed mode
+  const toggleNavbar = () => {
+    const navbar = document.getElementById("primary-navbar");
+    navbar.classList.remove("show");
+  };
+
   // Set the relevant cart element dependent on the state of the navbar
   if (navbarCollapsed) {
     cartCollapse = (
       <li className="nav-item">
-        <Link to="/cart" className="nav-link">
+        <Link to="/cart" className="nav-link" onClick={toggleNavbar}>
           Cart ({totalQuantity})
         </Link>
       </li>
@@ -46,7 +52,7 @@ const NavBar = () => {
         </Link>
       </div>
     );
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-x-light bg-gradient border-bottom">
@@ -72,15 +78,15 @@ const NavBar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
         </div>
-        <div className="navbar-collapse" id="primary-navbar">
+        <div className="navbar-collapse collapse" id="primary-navbar">
           <ul className="navbar-nav mx-auto">
             <li className="nav-item">
-              <Link to="/about" className="nav-link">
+              <Link to="/about" className="nav-link" onClick={toggleNavbar}>
                 About
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="#" className="nav-link">
+              <Link to="#" className="nav-link" onClick={toggleNavbar}>
                 Contact
               </Link>
             </li>
