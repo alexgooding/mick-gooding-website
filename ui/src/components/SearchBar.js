@@ -19,9 +19,9 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="form-inline" data-mdb-input-init>
-      <form action="/" method="get">
-        <div className="input-group">
+    <div className="form-inline h-100" data-mdb-input-init>
+      <form className="h-100" action="/" method="get">
+        <div className="input-group h-100">
           <input
             type="text"
             id="header-search"
@@ -31,7 +31,7 @@ const SearchBar = () => {
             defaultValue={name}
             onChange={handleInputChange}
           />
-          <button type="submit" className="input-group-append btn btn-primary" data-mdb-ripple-init>
+          <button type="submit" className="input-group-append btn btn-outline-dark border" data-mdb-ripple-init>
             <IoIosSearch />
           </button>
         </div>

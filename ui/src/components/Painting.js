@@ -50,7 +50,7 @@ const Painting = ({ painting, products }) => {
 
   return (
     <div className="d-flex flex-column h-100 text-center">
-      <div className={`${fullScreen ? "full-screen" : ""}`}>
+      <div className={`${fullScreen ? "full-screen" : "mt-auto"}`}>
         <img
           src={fullScreen ? highResImagePath : lowResImagePath}
           alt={`Painting: ${painting.name}`}
@@ -59,12 +59,12 @@ const Painting = ({ painting, products }) => {
           onError={(e) => { e.target.src = defaultImagePath; }}
         />
       </div>
-      <div className="mt-auto">
+      <div>
         <h4 className="mt-3">{painting.name}</h4>
         <select id={`productDropdown_${painting.painting_id}`} className="mt-2" onChange={handleSelect}>
           {products.map((product) => (
             <option key={product.product_id} value={product.product_id}>
-              {product.product_type} - £{product.price}
+              {product.product_type} - £{parseFloat(product.price).toFixed(2)}
             </option>
           ))}
         </select>
@@ -100,7 +100,7 @@ const Painting = ({ painting, products }) => {
               </span>
           </div>
         </div>
-        <button className="mt-2" onClick={handleAddToCart}>Add to Cart</button>
+        <button type="button" className="btn btn-outline-dark btn-sm mt-2" onClick={handleAddToCart}>Add to basket</button>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Painting from "./Painting";
 import { useLocation } from "react-router-dom";
+
+import Painting from "./Painting";
+import "../styles/Home.css";
 
 const client = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -11,7 +13,8 @@ const Home = () => {
   const [paintings, setPaintings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsText, setResultsText] = useState("");
-  const paintingsPerPage = 15;
+  const headerLogo = `${process.env.PUBLIC_URL}/images/logos/mick_gooding_art_1_stretched.png`
+  const paintingsPerPage = 10;
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const name = queryParams.get('name');
@@ -114,13 +117,13 @@ const Home = () => {
 
   return (
     <div className="container mb-4">
-      <div className="d-flex justify-content-center my-4">
+      <div className="d-flex justify-content-center my-3">
         <span>
           {resultsText}
         </span>
-        <h1>
-          {resultsText ? "" : "Mick Gooding's Canvas Art"}
-        </h1>
+        {resultsText ? 
+          "" : 
+          <img src={headerLogo} alt="Mick Gooding Art Logo" className="header-logo img-fluid" />}
       </div>
       <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
         {currentPaintings.map((painting) => (
@@ -133,7 +136,7 @@ const Home = () => {
       <div className="d-flex justify-content-center mt-4">
         {/* Previous button */}
         <button
-          className="btn btn-outline-primary me-2"
+          className="btn btn-outline-dark btn-xs me-2"
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
@@ -145,7 +148,7 @@ const Home = () => {
             return (
               <button
                 key={pageNumber}
-                className={`btn ${currentPage === pageNumber ? 'btn-primary' : 'btn-outline-primary'} me-2`}
+                className={`btn btn-xs ${currentPage === pageNumber ? 'btn-dark' : 'btn-outline-dark'} me-2`}
                 onClick={() => paginate(pageNumber)}
               >
                 {pageNumber}
@@ -161,7 +164,7 @@ const Home = () => {
         })}
         {/* Next button */}
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-outline-dark btn-xs"
           onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
           disabled={currentPage === totalPages}
         >
