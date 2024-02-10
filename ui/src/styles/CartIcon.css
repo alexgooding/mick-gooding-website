@@ -3,9 +3,19 @@
 }
 
 .shopping-cart-icon {
-  font-size: 2.5em;
+  font-size: 2.438em;
+  color: rgba(0, 0, 0, 0.65);
 }
 
-.quantity-text {
-  font-size: 0.5em;
+.quantity-badge {
+  font-size: 0.6em;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.shopping-cart-container:hover .shopping-cart-icon {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.shopping-cart-container:hover .quantity-badge {
+  background-color: rgba(0, 0, 0, 0.8);
 }

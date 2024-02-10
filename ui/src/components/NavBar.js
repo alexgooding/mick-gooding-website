@@ -40,7 +40,7 @@ const NavBar = () => {
     );
   } else {
     cartNav = (
-      <div className="d-flex align-items-right ps-3">
+      <div className="d-flex align-items-right ps-3 pt-2">
         <Link to="/cart">
           <ShoppingCartIcon value={totalQuantity} className="shopping-cart" />
         </Link>
@@ -49,14 +49,14 @@ const NavBar = () => {
   }
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-x-light bg-gradient border-bottom">
       <div className="container-fluid">
         <div className={navbarCollapsed ? "d-flex flex-grow-1 align-items-center" : "d-flex"}>
           <Link to="/" className="navbar-brand me-auto">
             <img src={navbarBrandLogo} alt="Mick Signature Logo" height="45" />
           </Link>
           <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
+            <li className="nav-item mx-2">
               {navbarCollapsed ? <SearchBar /> : null}
             </li>
           </ul>
@@ -85,7 +85,7 @@ const NavBar = () => {
               </Link>
             </li>
             {cartCollapse}
-            <li className="nav-item ms-2">
+            <li className="nav-item mx-2">
               {navbarCollapsed ? null : <SearchBar />}
             </li>
           </ul>
