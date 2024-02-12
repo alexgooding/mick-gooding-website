@@ -13,7 +13,7 @@ const Home = () => {
   const [paintings, setPaintings] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsText, setResultsText] = useState("");
-  const headerLogo = `${process.env.PUBLIC_URL}/images/logos/mick_gooding_art_1_stretched.png`
+  const headerLogo = `${process.env.PUBLIC_URL}/images/logos/mick_gooding_art_1_stretched.png`;
   const paintingsPerPage = 10;
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
