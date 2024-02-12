@@ -1,0 +1,8 @@
+.social-handle {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.social-handle:hover {
+  color: rgba(0, 0, 0, 0.95);
+}

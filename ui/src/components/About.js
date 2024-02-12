@@ -1,3 +1,10 @@
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
+
+import "../styles/CommonLink.css";
+
+
 const About = () => {
   const squareImg1 = `${process.env.PUBLIC_URL}/images/about/mick2_square.gif`;
   const squareImg2 = `${process.env.PUBLIC_URL}/images/about/IMG_4395_square.jpg`;
@@ -48,6 +55,24 @@ const About = () => {
             <figcaption className="fig-caption text-muted small">
               Photos: Clare Gooding
             </figcaption>
+          </div>
+          <div className="row mt-2">
+            <a className="icon-link d-flex social-handle" href="https://facebook.com/micksart" target="_blank">
+              <FaFacebook />
+              micksart
+            </a>
+          </div>
+          <div className="row">
+            <a className="icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank">
+              <FaInstagram />
+              micksbestart
+            </a>
+          </div>
+          <div className="row">
+            <a className="icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank">
+              <MdOutlineEmail />
+              contact@mickgooding.co.uk
+            </a>
           </div>
         </div>
       </div>
