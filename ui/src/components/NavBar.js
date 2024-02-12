@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { MdOutlineEmail } from "react-icons/md";
 
 import { useCart } from "../contexts/CartContext";
 import SearchBar from "./SearchBar";
 import ShoppingCartIcon from "./CartIcon";
+
 
 const NavBar = () => {
   const { getQuantityOfAllProducts } = useCart();
@@ -90,7 +94,41 @@ const NavBar = () => {
                 Contact
               </Link>
             </li>
+            {navbarCollapsed ? null : 
+            <li className="nav-item">
+              <Link to="https://facebook.com/micksart" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <FaFacebook />
+              </Link>
+            </li>
+            }
+            {navbarCollapsed ? null :
+            <li className="nav-item">
+              <Link to="https://www.instagram.com/micksbestart" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <FaInstagram />
+              </Link>
+            </li>
+            }
+            {navbarCollapsed ? null :
+            <li className="nav-item">
+              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <MdOutlineEmail />
+              </Link>
+             </li>
+            }
             {cartCollapse}
+            {navbarCollapsed ? 
+            <li className="d-flex nav-item full-screen-width-container justify-content-center border-top">
+              <Link to="https://facebook.com/micksart" className="nav-link px-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <FaFacebook />
+              </Link>
+              <Link to="https://www.instagram.com/micksbestart" className="nav-link px-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <FaInstagram />
+              </Link>
+              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link p-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+                <MdOutlineEmail />
+              </Link>
+            </li> 
+            : null}
             <li className="nav-item mx-2">
               {navbarCollapsed ? null : <SearchBar />}
             </li>

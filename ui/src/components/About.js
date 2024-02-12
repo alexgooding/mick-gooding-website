@@ -52,24 +52,24 @@ const About = () => {
             </div>
           </div>
           <div className="row">
-            <figcaption className="fig-caption text-muted small">
+            <figcaption className="col col-auto fig-caption text-muted small">
               Photos: Clare Gooding
             </figcaption>
           </div>
           <div className="row mt-2">
-            <a className="icon-link d-flex social-handle" href="https://facebook.com/micksart" target="_blank">
+            <a className="col col-auto icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
               <FaFacebook />
               micksart
             </a>
           </div>
           <div className="row">
-            <a className="icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank">
+            <a className="col col-auto icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
               <FaInstagram />
               micksbestart
             </a>
           </div>
           <div className="row">
-            <a className="icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank">
+            <a className="col col-auto icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
               <MdOutlineEmail />
               contact@mickgooding.co.uk
             </a>
