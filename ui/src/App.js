@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import About from "./components/About";
 import Cart from "./components/Cart";
+import Contact from "./components/Contact";
 import OrderConfirmation from "./components/OrderConfirmation";
 import { CartProvider } from "./contexts/CartContext";
 
@@ -20,6 +21,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/order/:orderId" element={<OrderConfirmation />} />
         </Routes>
       </div>

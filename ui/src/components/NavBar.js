@@ -35,8 +35,10 @@ const NavBar = () => {
 
   // A method to collapse the navbar dropdown in collapsed mode
   const toggleNavbar = () => {
-    const navbar = document.getElementById("primary-navbar");
-    navbar.classList.remove("show");
+    if (navbarCollapsed) {
+      const navbar = document.getElementById("primary-navbar");
+      navbar.classList.remove("show");
+    };
   };
 
   // Set the relevant cart element dependent on the state of the navbar
@@ -90,27 +92,27 @@ const NavBar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="#" className="nav-link" onClick={toggleNavbar}>
+              <Link to="/contact" className="nav-link" onClick={toggleNavbar}>
                 Contact
               </Link>
             </li>
+            {navbarCollapsed ? null :
+            <li className="nav-item">
+              <Link to="https://www.instagram.com/micksbestart" className="nav-link" target="_blank" rel="noreferrer">
+                <FaInstagram />
+              </Link>
+            </li>
+            }
             {navbarCollapsed ? null : 
             <li className="nav-item">
-              <Link to="https://facebook.com/micksart" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+              <Link to="https://facebook.com/micksart" className="nav-link" target="_blank" rel="noreferrer">
                 <FaFacebook />
               </Link>
             </li>
             }
             {navbarCollapsed ? null :
             <li className="nav-item">
-              <Link to="https://www.instagram.com/micksbestart" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
-                <FaInstagram />
-              </Link>
-            </li>
-            }
-            {navbarCollapsed ? null :
-            <li className="nav-item">
-              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link" target="_blank" rel="noreferrer">
                 <MdOutlineEmail />
               </Link>
              </li>
@@ -118,13 +120,13 @@ const NavBar = () => {
             {cartCollapse}
             {navbarCollapsed ? 
             <li className="d-flex nav-item full-screen-width-container justify-content-center border-top">
-              <Link to="https://facebook.com/micksart" className="nav-link px-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
-                <FaFacebook />
-              </Link>
-              <Link to="https://www.instagram.com/micksbestart" className="nav-link px-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+              <Link to="https://www.instagram.com/micksbestart" className="nav-link px-2" target="_blank" rel="noreferrer">
                 <FaInstagram />
               </Link>
-              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link p-2" target="_blank" rel="noreferrer" onClick={toggleNavbar}>
+              <Link to="https://facebook.com/micksart" className="nav-link px-2" target="_blank" rel="noreferrer">
+                <FaFacebook />
+              </Link>
+              <Link to="mailto:contact@mickgooding.co.uk" className="nav-link p-2" target="_blank" rel="noreferrer">
                 <MdOutlineEmail />
               </Link>
             </li> 
