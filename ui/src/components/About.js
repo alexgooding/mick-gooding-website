@@ -57,15 +57,15 @@ const About = () => {
             </figcaption>
           </div>
           <div className="row mt-2">
-            <a className="col col-auto icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
-              <FaFacebook />
-              micksart
-            </a>
-          </div>
-          <div className="row">
             <a className="col col-auto icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
               <FaInstagram />
               micksbestart
+            </a>
+          </div>
+          <div className="row">
+            <a className="col col-auto icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
+              <FaFacebook />
+              micksart
             </a>
           </div>
           <div className="row">
