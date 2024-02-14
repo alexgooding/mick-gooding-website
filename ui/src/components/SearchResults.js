@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 import Painting from "./Painting";
+import SearchBar from "./SearchBar";
 
 
 const client = axios.create({
@@ -115,8 +116,11 @@ const SearchResults = () => {
   const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
 
   return (
-    <div className="container mb-4">
-      <div className="d-flex justify-content-center my-3">
+    <div className="container my-4">
+      <div className="d-flex justify-content-center mb-3">
+        <SearchBar />
+      </div>
+      <div className="d-flex justify-content-center mb-3">
         <span>
           {resultsText}
         </span>
