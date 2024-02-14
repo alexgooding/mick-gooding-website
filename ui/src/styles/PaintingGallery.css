@@ -1,0 +1,12 @@
+.carousel {
+  width: 90%;
+  max-width: fit-content;
+}
+
+.carousel-inner {
+  cursor: pointer;
+}
+
+.carousel-item img {
+  max-height: 800px;
+}

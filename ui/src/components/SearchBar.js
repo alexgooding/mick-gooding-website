@@ -20,7 +20,7 @@ const SearchBar = () => {
 
   return (
     <div className="form-inline h-100" data-mdb-input-init>
-      <form className="h-100" action="/" method="get">
+      <form className="h-100" action="/s" method="get">
         <div className="input-group h-100">
           <input
             type="text"

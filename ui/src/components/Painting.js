@@ -8,7 +8,7 @@ import "../styles/CommonImage.css"
 const Painting = ({ painting, products }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.jpg`;
   const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${painting.painting_id}.jpg`;
-  const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
+  const defaultImagePath = `${process.env.PUBLIC_URL}/images/default.jpg`
   const [fullScreen, setFullScreen] = useState(false);
 
   const toggleFullScreen = () => {
