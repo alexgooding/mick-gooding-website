@@ -90,6 +90,11 @@ const NavBar = () => {
                 Contact
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to="/s" className="nav-link" onClick={toggleNavbar}>
+                Store
+              </Link>
+            </li>
             {navbarCollapsed ? null :
             <li className="nav-item">
               <Link to="https://www.instagram.com/micksbestart" className="nav-link" target="_blank" rel="noreferrer">
