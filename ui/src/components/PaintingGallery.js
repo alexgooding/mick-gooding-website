@@ -14,7 +14,7 @@ const PaintingGallery = ({ onClickMethod }) => {
   }
 
   return (
-    <div id="paintingCarousel" className="carousel carousel-dark slide carousel-fade mx-auto" data-bs-ride="carousel">
+    <div id="paintingCarousel" className="carousel carousel-dark slide carousel-fade mx-auto w-100" data-bs-ride="carousel">
       <div title="View all art" className="carousel-inner" onClick={onClickMethod}>
         <div className="carousel-item active">
           <img key="a" src={imageList[0]} alt="image-a" className="d-block img-fluid mx-auto" />

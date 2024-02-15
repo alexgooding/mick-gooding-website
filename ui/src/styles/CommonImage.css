@@ -27,5 +27,5 @@
 .full-screen-image {
   max-width: 95%;
   max-height: 95%;
-  object-fit: contain; /* Ensure the image maintains its aspect ratio and fits within the container */
+  object-fit: contain;
 }

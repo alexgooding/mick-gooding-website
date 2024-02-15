@@ -1,3 +1,5 @@
 .header-logo {
-  max-height: 120px;
+  /* Judge min height from 320px width phone screen */
+  min-height: 57px;
+  max-height: 10vh;
 }

@@ -13,11 +13,11 @@ const Home = () => {
   };
 
   return (
-    <div className="container mb-5">
-      <div className="d-flex justify-content-center my-3">
+    <div className="container-fluid p-4">
+      <div className="d-flex justify-content-center mb-3">
         <img src={headerLogo} alt="Mick Gooding Art Logo" className="header-logo img-fluid" />
       </div>
-      <div className="my-3">
+      <div>
         <PaintingGallery onClickMethod={enterWebsite} />
       </div>
     </div>
