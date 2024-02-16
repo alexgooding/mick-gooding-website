@@ -7,4 +7,4 @@ ENV POSTGRES_USER=admin
 ENV POSTGRES_PASSWORD=admin
 
 # Copy DB init scripts
-COPY src/sql/ /docker-entrypoint-initdb.d/
+COPY ./src/sql/ /docker-entrypoint-initdb.d/
