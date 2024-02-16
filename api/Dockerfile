@@ -4,7 +4,7 @@ FROM python:3.11.5 AS builder
 WORKDIR /app
 
 # Copy only the necessary files for installing test dependencies
-COPY requirements.txt .
+COPY ./requirements.txt .
 
 # Install test dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -24,7 +24,7 @@ WORKDIR /app
 COPY --from=builder /app/src /app/src
 
 # Copy only the necessary files for installing dependencies
-COPY requirements.txt .
+COPY ./requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
