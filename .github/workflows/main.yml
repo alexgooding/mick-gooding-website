@@ -11,11 +11,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-database
+          - image: "${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-database"
             dockerfile: ./database/Dockerfile
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-backend
+          - image: "${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-backend"
             dockerfile: ./api/Dockerfile
-          - image: ${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-frontend
+          - image: "${{ secrets.DOCKERHUB_USERNAME }}/mick-gooding-website-frontend"
             dockerfile: ./ui/Dockerfile
     steps:
       -
