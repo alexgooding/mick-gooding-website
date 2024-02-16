@@ -1,6 +1,7 @@
 services:
   database:
     build: ./database
+    image: alexg12/mick-gooding-website-database
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -10,6 +11,7 @@ services:
 
   backend:
     build: ./api
+    image: alexg12/mick-gooding-website-backend
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -24,6 +26,7 @@ services:
   
   frontend:
     build: ./ui
+    image: alexg12/mick-gooding-website-frontend
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
