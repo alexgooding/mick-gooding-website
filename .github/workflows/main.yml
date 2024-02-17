@@ -11,11 +11,14 @@ jobs:
     strategy:
       matrix:
         include:
-          - image: alexg12/mick-gooding-website-database
+          - component: database
+            image: alexg12/mick-gooding-website-database
             dockerfile: ./database/Dockerfile
-          - image: alexg12/mick-gooding-website-backend
+          - component: api
+            image: alexg12/mick-gooding-website-backend
             dockerfile: ./api/Dockerfile
-          - image: alexg12/mick-gooding-website-frontend
+          - component: ui
+            image: alexg12/mick-gooding-website-frontend
             dockerfile: ./ui/Dockerfile
     steps:
       -
@@ -37,7 +40,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: .
+          context: ./${{ matrix.component }}
           file: ${{ matrix.dockerfile }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
