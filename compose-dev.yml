@@ -1,17 +1,17 @@
 services:
   database:
     build: ./database
-    image: alexg12/mick-gooding-website-database
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    expose:
-      - 5432
+    ports:
+      - 5432:5432
 
   backend:
-    build: ./api
-    image: alexg12/mick-gooding-website-backend
+    build:
+      context: ./api
+      target: dev
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
       - POSTGRES_USER=${POSTGRES_USER}
@@ -19,14 +19,16 @@ services:
       - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
       - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
       - PAYPAL_CLIENT_MODE=${PAYPAL_CLIENT_MODE}
+      - ENVIRONMENT=dev
     ports:
     - 5000:5000
     volumes:
       - ./api:/app
   
   frontend:
-    build: ./ui
-    image: alexg12/mick-gooding-website-frontend
+    build:
+      context: ./ui
+      target: dev
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
