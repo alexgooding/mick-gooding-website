@@ -1,0 +1,38 @@
+services:
+  database:
+    image: alexg12/mick-gooding-website-database
+    build: ./database
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    expose:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+
+  backend:
+    image: alexg12/mick-gooding-website-backend
+    build: ./api
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
+      - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
+      - PAYPAL_CLIENT_MODE=${PAYPAL_CLIENT_MODE}
+      - ENVIRONMENT=prod
+    ports:
+      - 5000:5000
+    restart: always
+  
+  frontend:
+    image: alexg12/mick-gooding-website-frontend
+    build: ./ui
+    ports:
+      - 3000:3000
+    restart: always
+
+volumes:
+  postgres_data:
