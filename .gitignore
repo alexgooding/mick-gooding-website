@@ -3,5 +3,5 @@ __pycache__
 .venv
 
 # Local dev
-.env
+/.env
 .vscode
