@@ -3,6 +3,12 @@ from unittest.mock import patch, MagicMock
 import pytest
 from auth import create_db_connection, generate_paypal_access_token
 
+
+@pytest.fixture(autouse=True)
+def mock_env(monkeypatch):
+    with patch.dict(os.environ, clear=True):
+        yield
+
 @pytest.mark.parametrize("db_env_variables, expected_conn_params", [
     (
         {'POSTGRES_DB': 'test_db', 'POSTGRES_USER': 'test_user', 'POSTGRES_PASSWORD': 'test_password'},
