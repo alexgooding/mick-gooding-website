@@ -5,7 +5,7 @@ import "../styles/Home.css";
 
 
 const Home = () => {
-  const headerLogo = `${process.env.PUBLIC_URL}/images/logos/mick_gooding_art_1_stretched.png`;
+  const headerLogo = `${process.env.PUBLIC_URL}/images/logos/mick_gooding_art.png`;
   const navigate = useNavigate();
   
   const enterWebsite = () => {
