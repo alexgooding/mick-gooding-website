@@ -12,7 +12,7 @@ const NavBar = () => {
   const { getQuantityOfAllProducts } = useCart();
   const totalQuantity = getQuantityOfAllProducts();
   const [navbarCollapsed, setNavbarCollapsed] = useState(window.innerWidth < 992);
-  const navbarBrandLogo = `${process.env.PUBLIC_URL}/images/logos/mick_sig_1.png`
+  const navbarBrandLogo = `${process.env.PUBLIC_URL}/images/logos/mick_sig.png`
   let cartCollapse = null;
   let cartNav = null;
 
