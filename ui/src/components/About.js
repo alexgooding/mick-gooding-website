@@ -21,16 +21,23 @@ const About = () => {
       <div className="row">
         <div className="col col-12 col-md-6 p-3">
             <p>
-              I come from a family of artists. Whilst living in Boston, USA in the late 80's, I was inspired to paint by the abundance of art galleries and art studios. 
+              I come from a family of artists. Whilst living in Boston, USA in the late 80's I was inspired to paint by the abundance of art galleries & art studios. 
               It was in Boston that I studied art. On returning to England I was a finalist in the BBC TV's Art '90 Competition in Manchester. 
-              I have exhibited on London's Bayswater Road and been a regular at the Sunday Arts and Craft Market in Cambridge. 
-              In 2007 I was acknowledged in the Northampton Chronicle and Echo for painting an ex-Celtic and Northampton town player. 
-              Today I trade at music festivals whenever I can. 
-              I am a regular at the Cambridge Rock Festival and have had paintings signed by Larry Miller, Spike (The Quireboys), Olivia (Mostly Autumn), Ben Poole, Attica Rage, Pat McManus, Bonafide, Ali Clinton not to mention a few others.
+              I have exhibited on London's Bayswater Road & been a regular at the Sunday Arts & Craft Market in Cambridge. 
+              In 2007 I was acknowledged in the Northampton Chronicle & Echo for painting an ex-Celtic & Northampton town football player.  
             </p>
             <p>
-              I paint jazz, blues, rock, indie, pop, film and sporting personalities in acrylic or watercolour. My inspiration comes from my love of music and sport. 
-              In my youth I was able to see many legendary figures in concert. I do commissions for a wide range of people including well-known personalities and when possible get the paintings signed.
+              I love to paint rock, metal, prog rock , indie, blues, jazz & pop stars  in acrylic or watercolour. My inspiration comes from my love of music. 
+              In my youth I was able to see many legendary figures in concert.
+            </p>
+            <p>
+              In recent years I have exhibited at festivals where I have met with some of the  performing rock artists. 
+              It was great to get photos with Bernie Shaw of Uriah Heep, Mungo Jerry, Leon Hendrix (brother of Jimi Hendrix). 
+              I have had paintings signed by David Brock (Hawkwind), Larry Miller, Spike (The Quireboys), Olivia (Mostly Autumn), Ben Poole, Attica Rage, Pat McManus & Bonafide.
+            </p>
+            <p>
+              I’ve taken many photos over the years at festivals and I like to post my photos and paintings regularly on Instagram, 
+               Facebook and a selection of my painting can also be seen on <a className="social-handle" href="https://www.etsy.com/shop/MickGoodingCanvasArt" target="_blank" rel="noreferrer">Etsy</a>.
             </p>
           </div>
         {/* Limit width of col to handle low res image proportions */}
