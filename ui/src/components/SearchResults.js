@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
-import Painting from "./Painting";
+import SearchResultsItem from "./SearchResultsItem";
 import SearchBar from "./SearchBar";
 
 
@@ -12,9 +12,7 @@ const client = axios.create({
 
 const SearchResults = () => {
   const [paintings, setPaintings] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [resultsText, setResultsText] = useState("");
-  const paintingsPerPage = 10;
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const name = queryParams.get('name');
@@ -49,29 +47,13 @@ const SearchResults = () => {
 
       const cacheKey = name ? `paintings_${name}` : "paintings";
 
-      // Use a temporary array to accumulate paintings with products
-      let tempPaintingsWithProducts = [];
-
-      // Fetch and update paintings incrementally
-      for (const painting of paintingsData) {
-        const productsResponse = await client.get(`/painting/${painting.painting_id}/products`, { signal: abortController.signal });
-        const products = productsResponse.data;
-        const paintingWithProducts = { ...painting, products };
-
-        // Update state incrementally if no cached state exists to improve initial render time
-        tempPaintingsWithProducts = [...tempPaintingsWithProducts, paintingWithProducts];
-        if (localStorage.getItem(cacheKey) === null) {
-          setPaintings(tempPaintingsWithProducts);
-        }
-      }
-
-      setPaintings(tempPaintingsWithProducts);
+      setPaintings(paintingsData);
 
       // Cache the paintings data in localStorage
-      localStorage.setItem(cacheKey, JSON.stringify(tempPaintingsWithProducts));
+      localStorage.setItem(cacheKey, JSON.stringify(paintingsData));
 
       // Call generateResultsText after paintings have been updated
-      generateResultsText(tempPaintingsWithProducts.length, name);
+      generateResultsText(paintingsData.length, name);
     } catch (error) {
       console.error(error);
     }
@@ -102,19 +84,6 @@ const SearchResults = () => {
     }
   }, [name]);
 
-  // Function to handle pagination
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo(0, 0);
-  }
-
-  const indexOfLastPainting = currentPage * paintingsPerPage;
-  const indexOfFirstPainting = indexOfLastPainting - paintingsPerPage;
-  const currentPaintings = paintings.slice(indexOfFirstPainting, indexOfLastPainting);
-
-  const totalPages = Math.ceil(paintings.length / paintingsPerPage);
-  const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
-
   return (
     <div className="container my-4">
       <div className="d-flex justify-content-center mb-3">
@@ -125,51 +94,12 @@ const SearchResults = () => {
           {resultsText}
         </span>
       </div>
-      <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
-        {currentPaintings.map((painting) => (
-          <div key={painting.painting_id} className="col p-4">
-            <Painting painting={painting} products={painting.products} />
+      <div className="row row-cols-auto">
+        {paintings.map((painting) => (
+          <div key={painting.painting_id} className="col m-auto">
+            <SearchResultsItem painting={painting} />
           </div>
         ))}
-      </div>
-      {/* Page navigation bar */}
-      <div className="d-flex justify-content-center mt-4">
-        {/* Previous button */}
-        <button
-          className="btn btn-outline-dark btn-xs me-2"
-          onClick={() => paginate((prev) => Math.max(prev - 1, 1))}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        {/* Page buttons and ellipsis rendering */}
-        {pageNumbers.map((pageNumber) => {
-          if (pageNumber === 1 || pageNumber === totalPages || (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)) {
-            return (
-              <button
-                key={pageNumber}
-                className={`btn btn-xs ${currentPage === pageNumber ? 'btn-dark' : 'btn-outline-dark'} me-2`}
-                onClick={() => paginate(pageNumber)}
-              >
-                {pageNumber}
-              </button>
-            );
-          } else if (pageNumber === currentPage - 2 || pageNumber === currentPage + 2) {
-            return (
-              <span key={pageNumber} className="me-2">...</span>
-            );
-          } else {
-            return null;
-          }
-        })}
-        {/* Next button */}
-        <button
-          className="btn btn-outline-dark btn-xs"
-          onClick={() => paginate((prev) => Math.min(prev + 1, totalPages))}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
       </div>
     </div>
   );

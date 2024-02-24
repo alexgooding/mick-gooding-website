@@ -6,6 +6,7 @@ import "./styles/App.css";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import SearchResults from "./components/SearchResults";
+import Painting from "./components/Painting";
 import About from "./components/About";
 import Cart from "./components/Cart";
 import Contact from "./components/Contact";
@@ -21,6 +22,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/s" element={<SearchResults />} />
+          <Route path="/s/:paintingId" element={<Painting />} />
           <Route path="/about" element={<About />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/contact" element={<Contact />} />
