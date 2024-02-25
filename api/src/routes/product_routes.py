@@ -91,7 +91,7 @@ class ProductAllInfo(Resource):
         """
         query = """
             SELECT product_id, products.painting_id AS painting_id, product_type, 
-            price, stock, name 
+            price, stock, name, paintings.description as description 
             FROM products 
             JOIN paintings ON products.painting_id = paintings.painting_id 
             WHERE product_id = %s
