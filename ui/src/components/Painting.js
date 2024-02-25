@@ -23,9 +23,8 @@ const Painting = () => {
   const [painting, setPainting] = useState({});
   const [products, setProducts] = useState([]);
   const [fullScreen, setFullScreen] = useState(false);
-  // Store product ID for use in adding to cart
-  const [selectedProductId, setSelectedProductId] = useState("");
-  const [selectedProductPrice, setSelectedProductPrice] = useState(null);
+  // Store selected product for use in adding to component
+  const [selectedProduct, setSelectedProduct] = useState({});
   const [dropDownFocused, setDropDownFocused] = useState(false);
   const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${painting.painting_id}.jpg`;
   const defaultImagePath = `${process.env.PUBLIC_URL}/images/default.jpg`
@@ -54,15 +53,14 @@ const Painting = () => {
   const handleSelect = (e) => {
     let id = e?.target?.value;
     if (id) {
-      setSelectedProductId(id);
-      let price = products.find(d => d.product_id === parseInt(id))['price'];
-      setSelectedProductPrice(price);
+      let selectedProduct = products.find(d => d.product_id === parseInt(id));
+      setSelectedProduct(selectedProduct);
     };
   };
 
   const handleAddToCart = () => {
     // Call the addToCart function here with selectedProductId
-    addToCart(selectedProductId, 1);
+    addToCart(selectedProduct.product_id, 1);
   };
 
   // Fetch the relevant painting and associated products on initial render
@@ -106,16 +104,16 @@ const Painting = () => {
           </div>
           {
           painting.description && 
-          <div className="row mb-2">
+          <div className="row">
             <p>{painting.description}</p>
           </div>
           }
-          <div className="row mb-2">
-            <p>
-              Canvas prints are produced from original watercolour or acrylic paintings done by the artist, Mick Gooding. 
-              The canvas is stretched over 18 mm pine bars, is varnished and ready to hang.
-            </p>
+          {
+          selectedProduct.description && 
+          <div className="row">
+            <p>{selectedProduct.description}</p>
           </div>
+          }
           <div className="row mb-2">
             <select 
               id={`productDropdown_${painting.painting_id}`} 
@@ -136,7 +134,7 @@ const Painting = () => {
               type="button" 
               className="btn btn-outline-dark btn-sm mt-2" 
               onClick={handleAddToCart}>
-                Add to basket {selectedProductPrice && `• £${parseFloat(selectedProductPrice).toFixed(2)}`} 
+                Add to basket {selectedProduct.price && `• £${parseFloat(selectedProduct.price).toFixed(2)}`} 
             </button>
           </div> 
         </div>

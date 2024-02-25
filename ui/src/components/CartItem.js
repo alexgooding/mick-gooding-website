@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CiTrash } from "react-icons/ci";
 
 import { useCart } from "../contexts/CartContext";
@@ -7,17 +8,13 @@ import "../styles/CommonImage.css"
 
 const CartItem = ({ product }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${product.painting_id}.jpg`;
-  const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${product.painting_id}.jpg`;
   const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
-  const [fullScreen, setFullScreen] = useState(false);
   const { setQuantityOfProduct } = useCart();
+  const navigate = useNavigate(); 
 
-  const toggleFullScreen = () => {
-    setFullScreen(!fullScreen);
-
-    // Toggle the "locked" class on the body
-    document.body.classList.toggle('locked', !fullScreen);
-  };
+  const navigateToPainting = () => {
+    navigate(`/s/${product.painting_id}`);
+  }
 
   // State for the quantity element
   const [quantity, setQuantity] = useState(product.quantity);
@@ -33,19 +30,26 @@ const CartItem = ({ product }) => {
         <div className="card border-0">
           <div className="row g-0">
             <div className="col col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4 d-flex align-items-center justify-content-center">
-              <div className={`${fullScreen ? "full-screen" : "img-fluid rounded-start ratio ratio-1x1 zoom-in-pointer"}`}>
+              <div className="img-fluid rounded-start ratio ratio-1x1">
                 <img
-                  src={fullScreen ? highResImagePath : lowResImagePath}
+                  src={lowResImagePath}
                   alt={`Painting: ${product.name}`}
-                  className={`${fullScreen ? "full-screen-image" : "cart-item-image"}`}
-                  onClick={toggleFullScreen}
+                  className="cart-item-image"
+                  onClick={navigateToPainting}
+                  style={{ "cursor": "pointer" }}
                   onError={(e) => { e.target.src = defaultImagePath; }}
                 />
               </div>
             </div>
             <div className="col col-12 col-sm-5 col-md-6 col-lg-7 col-xl-8">
               <div className="card-body py-sm-0">
-                <b className="card-text description-item d-flex flex-nowrap">{product.name}</b>
+                <b 
+                  className="card-text description-item d-flex flex-nowrap" 
+                  onClick={navigateToPainting}
+                  style={{ "cursor": "pointer" }}
+                >
+                  {product.name}
+                </b>
                 <span className="card-text description-item d-flex flex-nowrap">{product.product_type}</span>
                 <div className="card-text description-item d-flex">
                   <label htmlFor="quantitySelect" className="me-2">Quantity:</label>
