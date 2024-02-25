@@ -12,6 +12,7 @@ CREATE TABLE products (
     product_id serial PRIMARY KEY,
     painting_id integer NOT NULL,
     product_type VARCHAR(50) NOT NULL,
+    description text,
     price DECIMAL NOT NULL,
     stock integer,
     FOREIGN KEY (painting_id) REFERENCES paintings(painting_id)

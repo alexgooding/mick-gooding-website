@@ -86,9 +86,12 @@ class ProductAllInfo(Resource):
     @product_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def get(self, product_id, conn):
+        """
+        Combined key info from the paintings and products relating to a particular product
+        """
         query = """
             SELECT product_id, products.painting_id AS painting_id, product_type, 
-            price, stock, name, description 
+            price, stock, name 
             FROM products 
             JOIN paintings ON products.painting_id = paintings.painting_id 
             WHERE product_id = %s
