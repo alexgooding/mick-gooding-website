@@ -2,6 +2,7 @@ import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
 
+import "../styles/About.css";
 import "../styles/CommonLink.css";
 
 
@@ -60,15 +61,27 @@ const About = () => {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img key="1" src={squareImg3} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="2" src={squareImg1} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="3" src={squareImg6} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Dave Brock</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="4" src={squareImg11} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Larry Miller</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -78,15 +91,27 @@ const About = () => {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img key="1" src={squareImg2} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Mungo Jerry</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="2" src={squareImg15} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Leon Hendrix</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="3" src={squareImg9} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Doris Brendel</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="4" src={squareImg12} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Olivia Sparnenn</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -98,15 +123,27 @@ const About = () => {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img key="1" src={squareImg5} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Arthur Brown</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="2" src={squareImg10} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Martin Barre</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="3" src={squareImg16} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Leon Hendrix</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="4" src={squareImg14} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Pat McManus</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,15 +153,27 @@ const About = () => {
                 <div className="carousel-inner">
                   <div className="carousel-item active">
                     <img key="1" src={squareImg7} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Bernie Shaw</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="2" src={squareImg8} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding with Louise Baker</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="3" src={squareImg4} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Mick Gooding</span>
+                    </div>
                   </div>
                   <div className="carousel-item">
                     <img key="4" src={squareImg13} alt="..." className="d-block img-fluid mx-auto" />
+                    <div class="about-carousel-caption carousel-caption">
+                      <span>Olivia Sparnenn</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,0 +1,25 @@
+.carousel-caption {
+  max-width: 100%;
+  width: 100%;
+  max-height: fit-content;
+  height: fit-content;
+  left: 0;
+  bottom: 0;
+  top: auto;
+  padding: 0;
+}
+
+.about-carousel-caption {
+  opacity: 0;
+  transition: 500ms ease-in-out;
+  background-color: rgba(20, 17, 17, 0.7);
+}
+
+.carousel-item:hover .about-carousel-caption {
+  opacity: 1;
+}
+
+.about-carousel-caption span {
+  font-size: min(2.5vw, 0.9em);
+  color: whitesmoke;
+}
