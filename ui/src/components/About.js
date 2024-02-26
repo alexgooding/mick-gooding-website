@@ -124,7 +124,7 @@ const About = () => {
                   <div className="carousel-item active">
                     <img key="1" src={squareImg5} alt="..." className="d-block img-fluid mx-auto" />
                     <div class="about-carousel-caption carousel-caption">
-                      <span>Mick Gooding with Arthur Brown</span>
+                      <span>Arthur Brown</span>
                     </div>
                   </div>
                   <div className="carousel-item">

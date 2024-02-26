@@ -86,7 +86,7 @@ const Cart = () => {
           <div className="row flex-nowrap">
             <div className="col">
               <div className="d-flex">
-                <span className="text-nowrap">Delivery</span>
+                <span className="text-nowrap">Delivery (UK only)</span>
               </div>
             </div>
             <div className="col">

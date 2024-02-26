@@ -11,6 +11,7 @@ const currencyCode = "GBP";
 const initialPayPalOptions = {
   clientId: "test",
   currency: "GBP",
+  locale: "en_GB",
   intent: "capture",
 };
 
@@ -88,6 +89,12 @@ const PaymentButtons = ({ cartData }) => {
     console.log(`The following error occured: ${err}`);
   }
 
+  const onShippingAddressChange = (data, actions) => {
+    if (data.shippingAddress.countryCode !== "GB") {
+      return actions.reject(data.errors.COUNTRY_ERROR);
+    };
+  }
+
   return (
     <PayPalScriptProvider options={initialPayPalOptions}>
       <PayPalButtons
@@ -96,6 +103,7 @@ const PaymentButtons = ({ cartData }) => {
         onApprove={onApprove}
         onCancel={onCancel}
         onError={onError}
+        onShippingAddressChange={onShippingAddressChange}
       />
     </PayPalScriptProvider>
   );
