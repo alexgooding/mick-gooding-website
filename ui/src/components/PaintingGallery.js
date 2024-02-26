@@ -14,14 +14,14 @@ const PaintingGallery = ({ onClickMethod }) => {
   }
 
   return (
-    <div id="paintingCarousel" className="carousel carousel-dark slide carousel-fade mx-auto w-100" data-bs-ride="carousel">
-      <div title="View all art" className="carousel-inner" onClick={onClickMethod}>
+    <div id="paintingCarousel" className="painting-carousel carousel carousel-dark slide carousel-fade mx-auto w-100" data-bs-ride="carousel">
+      <div title="View all art" className="painting-carousel-inner carousel-inner" onClick={onClickMethod}>
         <div className="carousel-item active">
-          <img key="a" src={imageList[0]} alt="image-a" className="d-block img-fluid mx-auto" />
+          <img className="painting-carousel-img d-block img-fluid mx-auto" key="a" src={imageList[0]} alt="image-a" />
         </div>
         {imageList.slice(1).map((image, index) => (
           <div className="carousel-item">
-            <img key={index} src={image} alt={`image-${index}`} className="d-block img-fluid mx-auto" />
+            <img className="painting-carousel-img d-block img-fluid mx-auto" key={index} src={image} alt={`image-${index}`} />
           </div>
         ))}
       </div>

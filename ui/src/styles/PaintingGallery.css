@@ -1,12 +1,12 @@
-.carousel {
+.painting-carousel {
   max-width: fit-content;
 }
 
-.carousel-inner {
+.painting-carousel-inner {
   cursor: pointer;
 }
 
-.carousel-item img {
+.painting-carousel-img {
   /* Judge min height from 320px width phone screen */
   min-height: 180px;
   /* Screen height minus the height of the navbar (72px), 
