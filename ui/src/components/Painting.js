@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { PiPackageFill } from "react-icons/pi";
 import axios from "axios";
 
 import { useCart } from "../contexts/CartContext";
@@ -114,7 +114,7 @@ const Painting = () => {
             <p>{selectedProduct.description}</p>
           </div>
           }
-          <div className="row mb-2">
+          <div className="row mb-3">
             <select 
               id={`productDropdown_${painting.painting_id}`} 
               className="mt-2" 
@@ -128,6 +128,13 @@ const Painting = () => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="row mb-2">
+            <div className="text-muted small icon-link">
+              <PiPackageFill />
+              {/* Set line height to ensure alignment with icon */}
+              <span style={{ lineHeight: "1" }}>Delivery to United Kingdom only</span>
+            </div>
           </div>
           <div className="row mb-2">
             <button 
