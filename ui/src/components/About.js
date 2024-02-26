@@ -53,7 +53,7 @@ const About = () => {
             </p>
           </div>
         {/* Limit width of col to handle low res image proportions */}
-        <div className="col col-12 col-md-6 p-2" style={{"max-width": 615}}>
+        <div className="col col-12 col-md-6 p-2" style={{ "max-width": 615 }}>
           <div className="row">
             <div className="col p-2">
               <div id="aboutCarousel1" className="carousel carousel-dark slide carousel-fade mx-auto w-100" data-bs-ride="carousel">
