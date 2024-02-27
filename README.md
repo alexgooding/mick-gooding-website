@@ -27,7 +27,9 @@ This will stand up a PostgreSQL database container with a newly created database
 
 If a development compose is running, the images and containers corresponding to the services will be build from the src. If production compose is running, it will attempt to pull the latest tagged images corresponding to each service from the Docker registry, before running. If no images exist in the registry, it will fall back on building them from src.
 
-The UI should be available at http://localhost:3000. API docs should be available at http://localhost:5000/api/swagger-ui.
+For development builds, the UI should be available at http://localhost:3000. API docs should be available at http://localhost:5000/api/swagger-ui.
+
+For production builds, only the UI should be available at http://localhost:80.
 
 Note: An independent Postgres database setup has been chosen, decoupling from the flask backend, in case the database schemas and data have to be managed separately.
 
