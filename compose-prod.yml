@@ -23,15 +23,15 @@ services:
       - PAYPAL_CLIENT_SECRET=${PAYPAL_CLIENT_SECRET}
       - PAYPAL_CLIENT_MODE=${PAYPAL_CLIENT_MODE}
       - ENVIRONMENT=prod
-    ports:
-      - 5000:5000
+    expose:
+      - 5000
     restart: always
   
   frontend:
     image: alexg12/mick-gooding-website-frontend
     build: ./ui
     ports:
-      - 3000:3000
+      - 80:80
     restart: always
 
 volumes:

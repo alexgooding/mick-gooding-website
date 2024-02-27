@@ -13,10 +13,18 @@ RUN npm install
 CMD ["npm", "start"]
 
 # Stage 3: Create prod image
-FROM base as prod
+FROM base as build
 
 RUN npm install --production
-RUN npm install -g serve
+
 RUN npm run build
 
-CMD ["serve", "-s", "build"]
+FROM nginx:alpine as prod
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
