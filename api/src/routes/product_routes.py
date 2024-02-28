@@ -108,7 +108,7 @@ class ProductAllInfo(Resource):
         return jsonify(product_info)
 
 @product_ns.route("/product/<int:product_id>/update-stock/<int:stock>")
-class ProductStock(Resource):
+class ProductStockUpdate(Resource):
     @product_ns.response(200, "Success")
     @product_ns.response(401, "Invalid database credentials")
     @product_ns.response(500, "Internal Server Error")
@@ -128,3 +128,27 @@ class ProductStock(Resource):
         return jsonify({
             'message': f"Stock updated successfully for product ID {product_id}"
         })
+
+@product_ns.route("/product/<int:product_id>/stock")
+class ProductStockGet(Resource):
+    @product_ns.response(200, "Success")
+    @product_ns.response(401, "Invalid database credentials")
+    @product_ns.response(404, "Product not found")
+    @product_ns.response(500, "Internal Server Error")
+    @create_con_handle_exceptions
+    def get(self, product_id, conn):
+        query = """
+            SELECT stock FROM products 
+            WHERE product_id = %s
+        """
+
+        with conn.cursor() as cur:
+            cur.execute(query, (product_id,))
+            stock = cur.fetchone()
+
+        if not stock:
+            # Raise 404 error if product is not found
+            abort(404, message="Product not found")
+
+
+        return jsonify(stock[0])
