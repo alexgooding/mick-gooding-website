@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CiTrash } from "react-icons/ci";
 
@@ -20,9 +20,19 @@ const CartItem = ({ product }) => {
   const [quantity, setQuantity] = useState(product.quantity);
 
   const handleQuantityChange = (value) => {
+    if (product.stock < value) {
+      value = product.stock
+    };
     setQuantity(value); // Update state
     setQuantityOfProduct(product.product_id, value); // Update in local storage
   };
+
+  useEffect(() => {
+    if (product.stock < quantity) {
+      setQuantity(product.stock);
+      setQuantityOfProduct(product.product_id, product.stock);
+    };
+  });
 
   return (
     <div className="row flex-nowrap">
@@ -53,8 +63,8 @@ const CartItem = ({ product }) => {
                 <span className="card-text description-item d-flex flex-nowrap">{product.product_type}</span>
                 <div className="card-text description-item d-flex">
                   <label htmlFor="quantitySelect" className="me-2">Quantity:</label>
-                  <select id="quantitySelect" defaultValue={quantity} onChange={(e) => handleQuantityChange(parseInt(e.target.value))}>
-                    {[...Array(11).keys()].map((value) => (
+                  <select id="quantitySelect" value={quantity} onChange={(e) => handleQuantityChange(parseInt(e.target.value))}>
+                    {[...Array(product.stock + 1).keys()].map((value) => (
                       <option key={value} value={value}>
                         {value}
                       </option>

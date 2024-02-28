@@ -70,7 +70,7 @@ def test_get_products_no_products_found(client):
     response = client.get('/api/products')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'No products found. You have requested this URI [/api/products] but did you mean /api/products or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/all-info ?'}
+    assert response.json == {'message': 'No products found. You have requested this URI [/api/products] but did you mean /api/products or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -102,7 +102,7 @@ def test_get_product_not_found(client):
     response = client.get('/api/product/1')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/all-info ?'}
+    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -134,7 +134,7 @@ def test_get_product_all_info_not_found(client):
     response = client.get('/api/product/1/all-info')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product info not found. You have requested this URI [/api/product/1/all-info] but did you mean /api/product/<int:product_id>/all-info or /api/product/<int:product_id>/update-stock/<int:stock> or /api/products ?'}
+    assert response.json == {'message': 'Product info not found. You have requested this URI [/api/product/1/all-info] but did you mean /api/product/<int:product_id>/all-info or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -164,6 +164,37 @@ def test_update_product_stock_invalid_credentials(client):
 @mock_db_operations(data=None, exception=Exception("Test error"))
 def test_update_product_stock_internal_server_error(client):
     response = client.put('/api/product/1/update-stock/50')
+
+    assert response.status_code == 500
+    assert response.json == {'message': 'Internal Server Error: Test error'}
+
+@mock_db_operations(data=1)
+def test_get_product_stock_success(client):
+    response = client.get('/api/product/1')
+
+    assert response.status_code == 200
+    assert response.json == 1
+
+
+@mock_db_operations(data=None, exception=OperationalError('Invalid database credentials'))
+def test_get_product_stock_invalid_credentials(client):
+    response = client.get('/api/product/1')
+
+    assert response.status_code == 401
+    assert response.json == {'message': "{OperationalError('Invalid database credentials')}"}
+
+
+@mock_db_operations(data={})
+def test_get_product_stock_not_found(client):
+    response = client.get('/api/product/1')
+
+    assert response.status_code == 404
+    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
+
+
+@mock_db_operations(data=None, exception=Exception("Test error"))
+def test_get_product_stock_internal_server_error(client):
+    response = client.get('/api/product/1')
 
     assert response.status_code == 500
     assert response.json == {'message': 'Internal Server Error: Test error'}

@@ -31,7 +31,7 @@ If a development compose is running, the images and containers corresponding to 
 
 For development builds, the UI should be available at http://localhost:3000. API docs should be available at http://localhost:5000/api/swagger-ui.
 
-For production builds, only the UI should be available at http://localhost:80.
+For production builds, only the UI should be available at https://localhost:80.
 
 Note: An independent Postgres database setup has been chosen, decoupling from the flask backend, in case the database schemas and data have to be managed separately.
 
