@@ -6,7 +6,7 @@
 
 ## App Setup
 
-Ensure an environment file has been created with database name, Postgres username, password, PayPal client ID, secret and mode included in the following format:
+Ensure an environment file has been created with database name, Postgres username, password, PayPal client ID, secret and mode included. For production deployment, ensure absolute paths to an SSL certificate and private key on the host machine are included too.
 
 ```
 POSTGRES_DB=<database_name>
@@ -15,12 +15,14 @@ POSTGRES_PASSWORD=<postgres_password>
 PAYPAL_CLIENT_ID=<client_id>
 PAYPAL_CLIENT_SECRET=<client_secret>
 PAYPAL_CLIENT_MODE=<SANDBOX|PRODUCTION>
+SSL_CERT_PATH=<ssl_cert_path>
+SSL_PRIVATE_KEY_PATH=<ssl_private_key_path>
 ```
 
 Start the web services with:
 
 ```
-docker compose -f compose-<dev|prod>.yml --env-file <path/to/env/file> up
+docker compose -f compose-<dev|prod>.yml --env-file <path/to/env/file> up -d
 ```
 
 This will stand up a PostgreSQL database container with a newly created database, using the POSTGRES credentials from the env file. It will standup up a backend API container, written with Flask, to communicate with the database and make requests to the PayPal API. Finally, it will stand up a React UI, for access within a browser.
