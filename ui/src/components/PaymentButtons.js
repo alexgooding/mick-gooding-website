@@ -31,6 +31,15 @@ const PaymentButtons = ({ cartData }) => {
 
   const createOrder = async (data) => {
 
+    // Check that all products in the cart are still in stock before proceeding with payment
+    for (let product of cartData) {
+      let response = await client.get(`/product/${product.product_id}/stock`);
+      let currentStock = response.data;
+      if (currentStock < product.quantity) {
+        window.location.reload();
+      };
+    };
+
     const cartTotal = cartData.reduce((sum, product) => {
       return sum + product.price * product.quantity;
     }, 0);
@@ -77,7 +86,6 @@ const PaymentButtons = ({ cartData }) => {
     .then((res) => {
       // Update stock for purchased products in the DB
       for (let product of cartData) {
-        console.log(product)
         let newStock = product.stock - product.quantity;
         client.put(`/product/${product.product_id}/update-stock/${newStock}`); 
       };
