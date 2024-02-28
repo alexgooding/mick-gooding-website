@@ -34,8 +34,12 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /etc/ssl/certs/mgw:/etc/nginx/certs
-      - /etc/ssl/private/mgw:/etc/nginx/private
+      - type: bind
+        source: ${SSL_CERT_PATH}
+        target: /etc/nginx/certs/mgw_ssl_certificate.cer
+      - type: bind
+        source: ${SSL_PRIVATE_KEY_PATH}
+        target: /etc/nginx/private/mgw_ssl_private_key.key
     restart: always
 
 volumes:
