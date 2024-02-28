@@ -18,7 +18,7 @@ const initialPayPalOptions = {
 const client = axios.create({
   headers: {
     post: {
-      'Content-Type': "application/json",
+      'Content-Type': "application/json"
     }
   },
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -75,6 +75,12 @@ const PaymentButtons = ({ cartData }) => {
   const onApprove = async (data) => {
     return await client.post(`/paypal/orders/${data.orderID}/capture`)
     .then((res) => {
+      // Update stock for purchased products in the DB
+      for (let product of cartData) {
+        console.log(product)
+        let newStock = product.stock - product.quantity;
+        client.put(`/product/${product.product_id}/update-stock/${newStock}`); 
+      };
       clearCart();
       navigate(`/order/${res.data.id}`);
     });
