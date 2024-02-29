@@ -122,9 +122,12 @@ const Painting = () => {
               onFocus={() => setDropDownFocused(true)} 
               onBlur={() => setDropDownFocused(false)}
             >
+              <option value="" disabled selected hidden>
+                Select a size
+              </option>
               {products.map((product) => (
-                <option key={product.product_id} value={product.product_id}>
-                  {product.product_type} {dropDownFocused && `(£${parseFloat(product.price).toFixed(2)})`}
+                <option key={product.product_id} value={product.product_id} disabled={!product.stock}>
+                  {product.product_type} {dropDownFocused && `(£${parseFloat(product.price).toFixed(2)})`} {!product.stock && "[Sold out]"}
                 </option>
               ))}
             </select>
@@ -140,7 +143,8 @@ const Painting = () => {
             <button 
               type="button" 
               className="btn btn-outline-dark btn-sm mt-2" 
-              onClick={handleAddToCart}>
+              onClick={handleAddToCart}
+              disabled={!selectedProduct.stock}>
                 Add to basket {selectedProduct.price && `• £${parseFloat(selectedProduct.price).toFixed(2)}`} 
             </button>
           </div> 
