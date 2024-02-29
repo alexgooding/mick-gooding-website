@@ -1,32 +1,55 @@
 import React from "react";
-
+import { Carousel } from "react-bootstrap";
 import "../styles/PaintingGallery.css";
 
-
 const PaintingGallery = ({ onClickMethod }) => {
-  const imagesLandscape = require.context("../../public/images/carousel/landscape/", true);
-  const imagesPortrait = require.context("../../public/images/carousel/portrait/", true);
+  const imagesLandscape = require.context(
+    "../../public/images/carousel/landscape/",
+    true
+  );
+  const imagesPortrait = require.context(
+    "../../public/images/carousel/portrait/",
+    true
+  );
   let imageList = null;
+
   if (window.innerWidth < 992) {
-    imageList = imagesPortrait.keys().map(image => imagesPortrait(image));
+    imageList = imagesPortrait.keys().map((image) => imagesPortrait(image));
   } else {
-    imageList = imagesLandscape.keys().map(image => imagesLandscape(image));
+    imageList = imagesLandscape.keys().map((image) => imagesLandscape(image));
   }
 
   return (
-    <div id="paintingCarousel" className="painting-carousel carousel carousel-dark slide carousel-fade mx-auto w-100" data-bs-ride="carousel">
-      <div title="View all art" className="painting-carousel-inner carousel-inner" onClick={onClickMethod}>
-        <div className="carousel-item active">
-          <img className="painting-carousel-img d-block img-fluid mx-auto" key="a" src={imageList[0]} alt="image-a" />
+    <Carousel
+      id="paintingCarousel"
+      className="painting-carousel carousel-fade mx-auto w-100"
+      data-bs-ride="carousel"
+      controls={false}
+      indicators={false}
+    >
+      <Carousel.Item>
+        <div title="View all art" onClick={onClickMethod} style={{ cursor: "pointer" }}>
+          <img
+            className="painting-carousel-img d-block img-fluid mx-auto"
+            key="a"
+            src={imageList[0]}
+            alt="image-a"
+          />
         </div>
-        {imageList.slice(1).map((image, index) => (
-          <div className="carousel-item">
-            <img className="painting-carousel-img d-block img-fluid mx-auto" key={index} src={image} alt={`image-${index}`} />
+      </Carousel.Item>
+      {imageList.slice(1).map((image, index) => (
+        <Carousel.Item key={index}>
+          <div title="View all art" onClick={onClickMethod} style={{ cursor: "pointer" }}>
+            <img
+              className="painting-carousel-img d-block img-fluid mx-auto"
+              src={image}
+              alt={`image-${index}`}
+            />
           </div>
-        ))}
-      </div>
-    </div>
+        </Carousel.Item>
+      ))}
+    </Carousel>
   );
-}
+};
 
 export default PaintingGallery;

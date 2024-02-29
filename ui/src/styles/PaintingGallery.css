@@ -2,10 +2,6 @@
   max-width: fit-content;
 }
 
-.painting-carousel-inner {
-  cursor: pointer;
-}
-
 .painting-carousel-img {
   /* Judge min height from 320px width phone screen */
   min-height: 180px;
