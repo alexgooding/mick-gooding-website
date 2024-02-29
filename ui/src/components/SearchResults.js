@@ -31,9 +31,9 @@ const SearchResults = () => {
     try {
       // Set results text to nothing until it is determined
       setResultsText("");
-      
+
       // Retrieve paintings
-      const url = name ? `/paintings?name=${name}` : "/paintings";
+      const url = name ? `/paintings?name=${name}&order_by=name` : "/paintings?order_by=name";
       let paintingsData = [];
       await client.get(url, { signal: abortController.signal })
         .then((response) => {
@@ -41,7 +41,7 @@ const SearchResults = () => {
         })
         .catch((error) => {
           if (error.response.status !== 404) {
-            throw new Error(error); 
+            throw new Error(error);
           }
         });
 
@@ -65,7 +65,7 @@ const SearchResults = () => {
 
     if (resultsLength === 0) {
       resultsText = `No results found for '${searchText}'.`;
-    } 
+    }
     else if (searchText) {
       resultsText = `${resultsLength} results found for '${name}'...`;
     }
