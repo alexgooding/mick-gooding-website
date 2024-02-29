@@ -51,6 +51,14 @@ def test_get_paintings_success(client):
     assert response.status_code == 200
     assert response.json == {'data': 'fake_data'}
 
+@mock_db_operations(data=None)
+def test_get_paintings_bad_request(client):
+    # Simulate a bad request by providing an invalid value for a parameter
+    response = client.get('/api/paintings?order=invalid_value')
+
+    assert response.status_code == 400
+    assert response.json == {'message': 'The browser (or proxy) sent a request that this server could not understand.'}
+
 @mock_db_operations(data=None, exception=OperationalError('Invalid database credentials'))
 def test_get_paintings_invalid_credentials(client):
     response = client.get('/api/paintings')
