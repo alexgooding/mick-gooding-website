@@ -4,7 +4,6 @@ import "../styles/CommonImage.css"
 
 const OrderConfirmationItem = ({ product }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${product.painting_id}.jpg`;
-  const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
 
   return (
     <div className="row flex-nowrap">
@@ -17,7 +16,6 @@ const OrderConfirmationItem = ({ product }) => {
                   src={lowResImagePath}
                   alt={`Painting: ${product.name}`}
                   className={"cart-item-image"}
-                  onError={(e) => { e.target.src = defaultImagePath; }}
                 />
               </div>
             </div>

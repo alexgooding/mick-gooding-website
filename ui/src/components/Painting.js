@@ -27,7 +27,6 @@ const Painting = () => {
   const [selectedProduct, setSelectedProduct] = useState({});
   const [dropDownFocused, setDropDownFocused] = useState(false);
   const highResImagePath = `${process.env.PUBLIC_URL}/images/high_res/${painting.painting_id}.jpg`;
-  const defaultImagePath = `${process.env.PUBLIC_URL}/images/default.jpg`
 
   const toggleFullScreen = () => {
     setFullScreen(!fullScreen);
@@ -94,7 +93,6 @@ const Painting = () => {
               alt={`Painting: ${painting.name}`}
               className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
               onClick={toggleFullScreen}
-              onError={(e) => { e.target.src = defaultImagePath; }}
             />
           </div>
         </div>

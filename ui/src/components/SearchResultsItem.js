@@ -5,7 +5,6 @@ import "../styles/SearchResultsItem.css";
 
 const SearchResultsItem = ({ painting }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.jpg`;
-  const defaultImagePath = `${process.env.PUBLIC_URL}/images/default.jpg`
   const navigate = useNavigate(); 
 
   const navigateToPainting = () => {
@@ -19,7 +18,6 @@ const SearchResultsItem = ({ painting }) => {
           src={lowResImagePath}
           alt={`Painting: ${painting.name}`}
           className="search-item-image"
-          onError={(e) => { e.target.src = defaultImagePath; }}
         />
       </div>
       <div>

@@ -8,7 +8,6 @@ import "../styles/CommonImage.css"
 
 const CartItem = ({ product }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${product.painting_id}.jpg`;
-  const defaultImagePath = `${process.env.PUBLIC_URL}/images/low_res/default.jpg`
   const { setQuantityOfProduct } = useCart();
   const navigate = useNavigate(); 
 
@@ -47,7 +46,6 @@ const CartItem = ({ product }) => {
                   className="cart-item-image"
                   onClick={navigateToPainting}
                   style={{ "cursor": "pointer" }}
-                  onError={(e) => { e.target.src = defaultImagePath; }}
                 />
               </div>
             </div>
