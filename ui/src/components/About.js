@@ -36,7 +36,7 @@ const About = () => {
             I come from a family of artists. Whilst living in Boston, USA in the late 80's I was inspired to paint by the abundance of art galleries and art studios.
             It was in Boston that I studied art. On returning to England I was a finalist in the BBC TV's Art '90 Competition in Manchester.
             I have exhibited on London's Bayswater Road and been a regular at the Sunday Arts and Craft Market in Cambridge.
-            In 2007 I was acknowledged in the Northampton Chronicle 28 x 35.5 cm Canvas Print Echo for painting an ex-Celtic and Northampton town football player.
+            In 2007 I was acknowledged in the Northampton Chronicle Echo for painting an ex-Celtic and Northampton town football player.
           </p>
           <p>
             I love to paint rock, metal, prog rock, indie, blues, jazz and pop stars in acrylic or watercolour. My inspiration comes from my love of music.
