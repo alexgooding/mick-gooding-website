@@ -16,10 +16,8 @@ const Contact = () => {
         <div className="col p-3">
           <p>
             Canvas prints are produced from original watercolour or acrylic paintings done by the artist, Mick Gooding. 
-            The canvas is stretched over 18 mm pine bars, is varnished and ready to hang.
-            Prices include P&P in the UK only. 
-            Delivery is normally within 28 days. 
-            If you like my style but there isn't a print of your favourite musician then get in touch & I'll see if I can create one to order.
+            The canvas is stretched over 18 mm pine bars, varnished and ready to hang.
+            Prices include free P&P in the UK only.
           </p>
         </div>
       </div>
