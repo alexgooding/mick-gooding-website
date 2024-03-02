@@ -87,12 +87,11 @@ const Painting = () => {
     <div className="container p-4">
       <div className="row justify-content-md-center">
         <div className="col col-12 col-md-8 col-xl-7 col-xxl-6 p-3">
-          <div className={`${fullScreen ? "full-screen" : "mt-auto"}`}>
+          <div className={`${fullScreen ? "full-screen" : "mt-auto"}`} onClick={toggleFullScreen}>
             <img
               src={highResImagePath}
               alt={`Painting: ${painting.name}`}
               className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
-              onClick={toggleFullScreen}
             />
           </div>
         </div>
