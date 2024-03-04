@@ -79,6 +79,12 @@ const SearchResults = () => {
     setInitialStateFromCache();
     fetchPaintings(abortController);
 
+    const storedScrollPosition = sessionStorage.getItem(`storeScrollPosition_${location.pathname}_${location.search}`);
+
+    if (storedScrollPosition !== null) {
+      setTimeout(() => window.scrollTo(0, parseInt(storedScrollPosition, 10)));
+    }
+
     return () => {
       abortController.abort();
     }
