@@ -8,6 +8,7 @@ const SearchResultsItem = ({ painting }) => {
   const navigate = useNavigate(); 
 
   const navigateToPainting = () => {
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
     navigate(`/s/${painting.painting_id}`);
   }
 

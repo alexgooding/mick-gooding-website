@@ -84,6 +84,14 @@ const SearchResults = () => {
     }
   }, [name]);
 
+  useEffect(() => {
+    const storedScrollPosition = sessionStorage.getItem('scrollPosition');
+
+    if (storedScrollPosition !== null) {
+      setTimeout(() => window.scrollTo(0, parseInt(storedScrollPosition, 10)));
+    }
+  }, []);
+
   return (
     <div className="container my-4">
       <div className="d-flex justify-content-center mb-3">
