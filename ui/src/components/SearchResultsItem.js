@@ -1,14 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import "../styles/SearchResultsItem.css";
 
 const SearchResultsItem = ({ painting }) => {
   const lowResImagePath = `${process.env.PUBLIC_URL}/images/low_res/${painting.painting_id}.jpg`;
+  const location = useLocation();
   const navigate = useNavigate(); 
 
   const navigateToPainting = () => {
-    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    sessionStorage.setItem(`storeScrollPosition_${location.pathname}_${location.search}`, window.scrollY.toString());
     navigate(`/s/${painting.painting_id}`);
   }
 

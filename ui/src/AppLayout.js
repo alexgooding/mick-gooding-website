@@ -1,11 +1,23 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Outlet, useLocation } from 'react-router-dom';
 
 import NavBar from './components/NavBar';
 import { CartProvider } from './contexts/CartContext';
 
 
-export default function AppLayout() {
+const AppLayout = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.pathname.includes('/s')) {
+      for (let key in sessionStorage) {
+        if (key.includes('storeScrollPosition')) {
+          sessionStorage.removeItem(key);
+        };
+      };
+    };
+  }, [location]);
+
   return (
     <CartProvider>
       <NavBar />
@@ -13,3 +25,5 @@ export default function AppLayout() {
     </CartProvider>
   );
 }
+
+export default AppLayout;
