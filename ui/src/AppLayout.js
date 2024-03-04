@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 
+import Footer from './components/Footer';
 import NavBar from './components/NavBar';
 import { CartProvider } from './contexts/CartContext';
 
@@ -22,6 +23,7 @@ const AppLayout = () => {
     <CartProvider>
       <NavBar />
       <Outlet />
+      <Footer />
     </CartProvider>
   );
 }
