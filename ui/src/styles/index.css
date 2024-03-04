@@ -4,6 +4,12 @@ body {
   font-family: "Crimson Text" !important;
 }
 
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .icon-button {
   appearance: none;
   -webkit-appearance: none;
