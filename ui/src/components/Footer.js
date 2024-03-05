@@ -7,9 +7,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="w-100 text-center mt-auto p-2 bg-white">
+    <footer className="w-100 text-center mt-auto p-3 bg-white">
       <div className="container text-center">
-        <span className="text-muted" style={{ "font-size": "0.75rem" }}>
+        <span className="text-muted" style={{ "font-size": "min(2vw, 0.75rem)" }}>
           © {getYear()} Mick Gooding Art. All rights reserved.
         </span>
       </div>
