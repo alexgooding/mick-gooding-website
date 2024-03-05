@@ -47,8 +47,6 @@ services:
   frontend:
     image: alexg12/mick-gooding-website-frontend
     build: ./ui
-    environment:
-      - REACT_APP_PAYPAL_CLIENT_ID=${PAYPAL_CLIENT_ID}
     ports:
       - 80:80
       - 443:443
