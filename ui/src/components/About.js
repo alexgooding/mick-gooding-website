@@ -24,7 +24,7 @@ const About = () => {
   const squareImg16 = `${process.env.PUBLIC_URL}/images/about/22-DSCF4277_sqare.jpg`;
 
   return (
-    <Container className="my-2">
+    <Container className="p-3">
       <Row>
         <Col className="p-3">
           <h1>About</h1>
@@ -52,9 +52,9 @@ const About = () => {
             Facebook, and a selection of my paintings can also be seen on <a className="social-handle" href="https://www.etsy.com/shop/MickGoodingCanvasArt" target="_blank" rel="noreferrer">Etsy</a>.
           </p>
         </Col>
-        <Col md={6} className="p-2" style={{ maxWidth: 615 }}>
+        <Col md={6} className="p-3" style={{ maxWidth: 615 }}>
           <Row>
-            <Col className="p-2">
+            <Col className="ps-0 pt-0 pe-2 pb-2">
               <Carousel 
                 id="aboutCarousel1" 
                 className="slide carousel-fade mx-auto w-100" 
@@ -88,7 +88,7 @@ const About = () => {
                 </Carousel.Item>
               </Carousel>
             </Col>
-            <Col className="p-2">
+            <Col className="ps-2 pt-0 pe-0 pb-2">
               <Carousel 
                 id="aboutCarousel2"
                 className="slide carousel-fade mx-auto w-100" 
@@ -123,8 +123,8 @@ const About = () => {
               </Carousel>
             </Col>
           </Row>
-          <Row>
-            <Col className="p-2">
+          <Row className="mb-2">
+            <Col className="ps-0 pt-2 pe-2 pb-0">
               <Carousel 
                 id="aboutCarousel3"
                 className="slide carousel-fade mx-auto w-100" 
@@ -158,7 +158,7 @@ const About = () => {
                 </Carousel.Item>
               </Carousel>
             </Col>
-            <Col className="p-2">
+            <Col className="ps-2 pt-2 pe-0 pb-0">
               <Carousel 
                 id="aboutCarousel4"
                 className="slide carousel-fade mx-auto w-100" 
@@ -193,25 +193,25 @@ const About = () => {
               </Carousel>
             </Col>
           </Row>
-          <Row>
-            <Figure.Caption className="col col-auto fig-caption text-muted small">
+          <Row className="mb-2">
+            <Figure.Caption className="col col-auto px-1 fig-caption text-muted small">
               Photos: Clare Gooding
             </Figure.Caption>
           </Row>
-          <Row className="mt-2">
-            <a className="col col-auto icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
+          <Row>
+            <a className="col col-auto px-1 icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
               <FaInstagram />
               micksbestart
             </a>
           </Row>
           <Row>
-            <a className="col col-auto icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
+            <a className="col col-auto px-1 icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
               <FaFacebook />
               micksart
             </a>
           </Row>
           <Row>
-            <a className="col col-auto icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
+            <a className="col col-auto px-1 icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
               <MdOutlineEmail />
               contact@mickgooding.co.uk
             </a>
