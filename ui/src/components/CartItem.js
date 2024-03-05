@@ -35,7 +35,7 @@ const CartItem = ({ product }) => {
 
   return (
     <div className="row flex-nowrap">
-      <div className="col col-9 p-4">
+      <div className="col col-9 p-3">
         <div className="card border-0">
           <div className="row g-0">
             <div className="col col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4 d-flex align-items-center justify-content-center">
@@ -79,7 +79,7 @@ const CartItem = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className="col col-3 p-4">
+      <div className="col col-3 p-3">
         <div className="d-flex justify-content-end">
           <span>£{(product.price * quantity).toFixed(2)}</span>
         </div>

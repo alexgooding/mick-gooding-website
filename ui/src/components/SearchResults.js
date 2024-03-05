@@ -91,7 +91,7 @@ const SearchResults = () => {
   }, [name]);
 
   return (
-    <div className="container my-4">
+    <div className="container p-3 mb-3">
       <div className="d-flex justify-content-center mb-3">
         <SearchBar />
       </div>

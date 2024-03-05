@@ -84,7 +84,7 @@ const Painting = () => {
   }, [products]);
 
   return (
-    <div className="container p-4">
+    <div className="container p-3">
       <div className="row justify-content-md-center">
         <div className="col col-12 col-md-8 col-xl-7 col-xxl-6 p-3">
           <div className={`${fullScreen ? "full-screen" : "mt-auto"}`} onClick={toggleFullScreen}>
@@ -97,24 +97,23 @@ const Painting = () => {
         </div>
         <div className="col col-12 col-md-4 p-3" style={{ "max-width": "450px" }}>
           <div className="row mb-2">
-            <h2>{painting.name}</h2>
+            <h2 className="px-1">{painting.name}</h2>
           </div>
           {
           painting.description && 
           <div className="row">
-            <p>{painting.description}</p>
+            <p className="px-1">{painting.description}</p>
           </div>
           }
           {
           selectedProduct.description && 
           <div className="row">
-            <p>{selectedProduct.description}</p>
+            <p className="px-1">{selectedProduct.description}</p>
           </div>
           }
           <div className="row mb-3">
             <select 
               id={`productDropdown_${painting.painting_id}`} 
-              className="mt-2" 
               onChange={handleSelect} 
               onFocus={() => setDropDownFocused(true)} 
               onBlur={() => setDropDownFocused(false)}
@@ -129,17 +128,17 @@ const Painting = () => {
               ))}
             </select>
           </div>
-          <div className="row mb-2">
-            <div className="text-muted small icon-link">
+          <div className="row mb-3">
+            <div className="text-muted small icon-link px-1">
               <PiPackageFill />
               {/* Set line height to ensure alignment with icon */}
               <span style={{ lineHeight: "1" }}>Delivery to United Kingdom only</span>
             </div>
           </div>
-          <div className="row mb-2">
+          <div className="row">
             <button 
               type="button" 
-              className="btn btn-outline-dark btn-sm mt-2" 
+              className="btn btn-outline-dark btn-sm" 
               onClick={handleAddToCart}
               disabled={!selectedProduct.stock}>
                 Add to basket {selectedProduct.price && `• £${parseFloat(selectedProduct.price).toFixed(2)}`} 

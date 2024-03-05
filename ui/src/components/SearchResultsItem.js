@@ -14,8 +14,8 @@ const SearchResultsItem = ({ painting }) => {
   }
 
   return (
-    <div className="search-item d-flex flex-column h-100 text-center p-4" onClick={navigateToPainting}>
-      <div className="mt-auto">
+    <div className="search-item d-flex flex-column h-100 text-center p-3" onClick={navigateToPainting}>
+      <div className="mb-3">
         <img
           src={lowResImagePath}
           alt={`Painting: ${painting.name}`}
@@ -23,7 +23,7 @@ const SearchResultsItem = ({ painting }) => {
         />
       </div>
       <div>
-        <h5 className="painting-name mt-3">{painting.name}</h5>
+        <h5 className="painting-name">{painting.name}</h5>
       </div>
     </div>
   );

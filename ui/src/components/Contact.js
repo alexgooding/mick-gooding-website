@@ -6,7 +6,7 @@ import { MdOutlineEmail } from "react-icons/md";
 const Contact = () => {
 
   return (
-    <div className="container my-2" style={{ "max-width": "960px" }}>
+    <div className="container p-3 mb-3" style={{ "max-width": "960px" }}>
       <div className="row">
         <div className="col col-12 p-3">
           <h2>Choose your print</h2>
@@ -34,19 +34,19 @@ const Contact = () => {
         </div>
       </div>
       <div className="row">
-        <a className="col col-auto icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
+        <a className="col col-auto px-3 icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
           <MdOutlineEmail />
           contact@mickgooding.co.uk
         </a>
       </div>
       <div className="row">
-        <a className="col col-auto icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
+        <a className="col col-auto px-3 icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
           <FaInstagram />
           micksbestart
         </a>
       </div>
       <div className="row">
-        <a className="col col-auto icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
+        <a className="col col-auto px-3 icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
           <FaFacebook />
           micksart
         </a>
