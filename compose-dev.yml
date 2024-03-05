@@ -32,6 +32,7 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+      - REACT_APP_PAYPAL_CLIENT_ID=test
     ports:
       - 3000:3000
     volumes:

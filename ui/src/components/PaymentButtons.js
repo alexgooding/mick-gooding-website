@@ -9,7 +9,7 @@ import { useCart } from "../contexts/CartContext";
 const currencyCode = "GBP";
 
 const initialPayPalOptions = {
-  clientId: "test",
+  clientId: process.env.REACT_APP_PAYPAL_CLIENT_ID,
   currency: "GBP",
   locale: "en_GB",
   intent: "capture",
