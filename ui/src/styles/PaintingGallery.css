@@ -6,6 +6,6 @@
   /* Judge min height from 320px width phone screen */
   min-height: 180px;
   /* Screen height minus the height of the navbar (72px), 
-  footer (56px), padding (32px), margins (32px) and header logo (15dvh) */
+  footer (56px), padding (32px), margins (32px) and header logo (13dvh) */
   max-height: calc(87dvh - 192px);
 }
