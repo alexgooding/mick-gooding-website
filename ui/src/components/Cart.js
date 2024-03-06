@@ -48,14 +48,14 @@ const Cart = () => {
   }, [getAllProductIds]);
 
   return (
-    <div className="container p-3">
+    <div className="container p-3 mb-3">
       <div className="row mb-2 text-center">
         <span className="p-3">
           {headerText}
         </span>
       </div>
       <div className={products.length === 0 ? "invisible" : "row"}>
-        <div className="col-12 col-sm-12 col-md-8 flex-nowrap p-3 shadow rounded-4">
+        <div className="col-12 col-sm-12 col-md-8 flex-nowrap p-3 mb-3 shadow rounded-4">
           {products.map((product) => {
             cartTotal += product.quantity * product.price;
 
@@ -63,19 +63,19 @@ const Cart = () => {
           })}
         </div>
 
-        <div className="col col-12 col-sm-12 col-md-4 p-3">
+        <div className="col col-12 col-sm-12 col-md-4 p-3 pb-0">
           <div className="row flex-nowrap mb-2">
-            <div className="d-flex px-1">
+            <div className="d-flex">
               <b className="text-nowrap">Order Summary</b>
             </div>
           </div>
           <div className="row flex-nowrap">
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex">
                 <span className="text-nowrap">Item(s) total</span>
               </div>
             </div>
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex justify-content-end">
                 <span className="text-nowrap">
                   £{cartTotal.toFixed(2)}
@@ -84,12 +84,12 @@ const Cart = () => {
             </div>
           </div>
           <div className="row flex-nowrap">
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex">
                 <span className="text-nowrap">Delivery (UK only)</span>
               </div>
             </div>
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex justify-content-end">
                 <span className="text-nowrap">
                   {deliveryFee === 0 ? "FREE" : `£${deliveryFee.toFixed(2)}`}
@@ -99,14 +99,14 @@ const Cart = () => {
           </div>
           <hr />
           <div className="row flex-nowrap mb-2">
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex">
                 <b className="text-nowrap">
                   Total ({getQuantityOfAllProducts()} items)
                 </b>
               </div>
             </div>
-            <div className="col px-1">
+            <div className="col">
               <div className="d-flex justify-content-end">
                 <b>
                   £{(cartTotal + deliveryFee).toFixed(2)}
@@ -115,7 +115,7 @@ const Cart = () => {
             </div>
           </div>
           <div className="row">
-            <div className="col px-1">
+            <div className="col">
               {products.length > 0 && (
                 <PaymentButtons cartData={products} key={keyForPaymentButtons} />
               )}
