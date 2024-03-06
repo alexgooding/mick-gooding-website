@@ -52,14 +52,14 @@ const CartItem = ({ product }) => {
             <div className="col col-12 col-sm-5 col-md-6 col-lg-7 col-xl-8">
               <div className="card-body py-sm-0">
                 <b 
-                  className="card-text description-item d-flex flex-nowrap" 
+                  className="card-text d-flex flex-nowrap mb-2" 
                   onClick={navigateToPainting}
                   style={{ "cursor": "pointer" }}
                 >
                   {product.name}
                 </b>
-                <span className="card-text description-item d-flex flex-nowrap">{product.product_type}</span>
-                <div className="card-text description-item d-flex">
+                <span className="card-text d-flex flex-nowrap mb-1">{product.product_type}</span>
+                <div className="card-text d-flex mb-1">
                   <label htmlFor="quantitySelect" className="me-2">Quantity:</label>
                   <select id="quantitySelect" value={quantity} onChange={(e) => handleQuantityChange(parseInt(e.target.value))}>
                     {[...Array(product.stock + 1).keys()].map((value) => (
@@ -69,7 +69,7 @@ const CartItem = ({ product }) => {
                     ))}
                   </select>
                 </div>
-                <div className="card-text description-item d-flex">
+                <div className="card-text d-flex">
                   <button className="icon-button" title="Delete" onClick={(e) => handleQuantityChange(0)}>
                     <CiTrash className="trash-icon"/>
                   </button>

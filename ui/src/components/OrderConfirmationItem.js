@@ -7,7 +7,7 @@ const OrderConfirmationItem = ({ product }) => {
 
   return (
     <div className="row flex-nowrap">
-      <div className="col col-9 p-4">
+      <div className="col col-9 p-3">
         <div className="card border-0">
           <div className="row g-0">
             <div className="col col-12 col-sm-7 col-md-6 col-lg-5 col-xl-4 d-flex align-items-center justify-content-center">
@@ -21,15 +21,15 @@ const OrderConfirmationItem = ({ product }) => {
             </div>
             <div className="col col-12 col-sm-5 col-md-6 col-lg-7 col-xl-8">
               <div className="card-body py-sm-0">
-                <b className="card-text description-item d-flex flex-nowrap">{product.name}</b>
-                <span className="card-text description-item d-flex flex-nowrap">{product.product_type}</span>
-                <span className="card-text description-item d-flex flex-nowrap">Quantity: {product.quantity}</span>
+                <b className="card-text d-flex flex-nowrap mb-2">{product.name}</b>
+                <span className="card-text d-flex flex-nowrap">{product.product_type}</span>
+                <span className="card-text d-flex flex-nowrap">Quantity: {product.quantity}</span>
               </div>
             </div> 
           </div>
         </div>
       </div>
-      <div className="col col-3 p-4">
+      <div className="col col-3 p-3">
         <div className="d-flex justify-content-end">
           <span>£{(product.price * product.quantity).toFixed(2)}</span>
         </div>
