@@ -8,6 +8,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     expose:
       - 5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     restart: always
 
   database-backup:
@@ -58,3 +60,6 @@ services:
         source: ${SSL_PRIVATE_KEY_PATH}
         target: /etc/nginx/private/mgw_ssl_private_key.key
     restart: always
+
+volumes:
+  pgdata:
