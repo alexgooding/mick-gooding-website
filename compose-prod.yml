@@ -1,6 +1,6 @@
 services:
   database:
-    image: alexg12/mick-gooding-website-database
+    image: alexg12/mick-gooding-website-database:${DOCKER_TAG:-latest}
     build: ./database
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
@@ -32,7 +32,7 @@ services:
     restart: always
 
   backend:
-    image: alexg12/mick-gooding-website-backend
+    image: alexg12/mick-gooding-website-backend:${DOCKER_TAG:-latest}
     build: ./api
     environment:
       - POSTGRES_DB=${POSTGRES_DB}
@@ -47,7 +47,7 @@ services:
     restart: always
   
   frontend:
-    image: alexg12/mick-gooding-website-frontend
+    image: alexg12/mick-gooding-website-frontend:${DOCKER_TAG:-latest}
     build: ./ui
     ports:
       - 80:80
