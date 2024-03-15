@@ -85,9 +85,10 @@ const PaymentButtons = ({ cartData }) => {
     return await client.post(`/paypal/orders/${data.orderID}/capture`)
     .then((res) => {
       // Update stock for purchased products in the DB
+      const putData = {'order_id': res.data.id};
       for (let product of cartData) {
         let newStock = product.stock - product.quantity;
-        client.put(`/product/${product.product_id}/update-stock/${newStock}`); 
+        client.put(`/product/${product.product_id}/update-stock/${newStock}`, putData); 
       };
       clearCart();
       navigate(`/order/${res.data.id}`);
