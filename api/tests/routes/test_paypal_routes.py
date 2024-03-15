@@ -11,6 +11,7 @@ def app():
     app = Flask(__name__)
     app.testing = True
     app.config['SERVER_NAME'] = 'localhost'
+    app.config['RESTX_ERROR_404_HELP'] = False
 
     base_api.init_app(app)
     base_api.add_namespace(paypal_ns, path='/api')

@@ -1,5 +1,5 @@
-from flask import jsonify, request
-from flask_restx import Namespace, Resource, abort
+from flask import jsonify, request, abort
+from flask_restx import Namespace, Resource
 from psycopg2.extras import RealDictCursor 
 from psycopg2.errors import UniqueViolation 
 
@@ -73,7 +73,7 @@ class Cart(Resource):
             cart = cur.fetchone()
         
         if not cart:
-            abort(404, message="Cart not found")
+            abort(404, "Cart not found")
 
         return jsonify(cart)
         
@@ -92,7 +92,7 @@ class CartProducts(Resource):
             cart_products = cur.fetchall()
         
         if not cart_products:
-            abort(404, message="Cart not found")
+            abort(404, "Cart not found")
 
         return jsonify(cart_products)
 
@@ -110,7 +110,7 @@ class CartProductQuantities(Resource):
         quantity = request.args.get('quantity')
 
         if product_id is None or quantity is None:
-            abort(400, message="'product_id' or 'quantity' missing from request body")
+            abort(400, "'product_id' or 'quantity' missing from request body")
 
         query = """
             INSERT INTO cart_products (cart_id, product_id, quantity)

@@ -13,6 +13,7 @@ def app():
     app = Flask(__name__)
     app.testing = True
     app.config['SERVER_NAME'] = 'localhost'
+    app.config['RESTX_ERROR_404_HELP'] = False
 
     base_api.init_app(app)
     base_api.add_namespace(product_ns, path='/api')
@@ -70,7 +71,7 @@ def test_get_products_no_products_found(client):
     response = client.get('/api/products')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'No products found. You have requested this URI [/api/products] but did you mean /api/products or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': 'No products found'}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -102,7 +103,7 @@ def test_get_product_not_found(client):
     response = client.get('/api/product/1')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -134,7 +135,7 @@ def test_get_product_all_info_not_found(client):
     response = client.get('/api/product/1/all-info')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product info not found. You have requested this URI [/api/product/1/all-info] but did you mean /api/product/<int:product_id>/all-info or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product info not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -189,7 +190,7 @@ def test_get_product_stock_not_found(client):
     response = client.get('/api/product/1')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
