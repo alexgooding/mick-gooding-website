@@ -1,10 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mick Gooding Art",
+  "name": "Mick Gooding Art",
+  "description": "View and purchase Mick Gooding's original artwork.",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "48x48",
       "type": "image/x-icon"
     },
     {
@@ -17,6 +18,22 @@
       "type": "image/png",
       "sizes": "512x512"
     }
+  ],
+  "screenshots": [
+    {
+     "src": "screenshots/desktop.png",
+      "sizes": "1920x1080",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop Home"
+    },
+    {
+      "src": "screenshots/mobile.png",
+       "sizes": "320x568",
+       "type": "image/png",
+       "form_factor": "narrow",
+       "label": "Mobile Home"
+     }
   ],
   "start_url": ".",
   "display": "standalone",
