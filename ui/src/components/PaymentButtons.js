@@ -24,6 +24,14 @@ const client = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
+const formatOrderText = (str, limit) => {
+  if (str.length > limit) {
+    str = str.substring(0, limit-3) + "...";
+  }
+
+  return str;
+};
+
 const PaymentButtons = ({ cartData }) => {
 
   const { clearCart } = useCart();
@@ -49,9 +57,9 @@ const PaymentButtons = ({ cartData }) => {
       purchase_units: [
         {
           items: cartData.map((product) => ({
-            name: product.name,
+            name: formatOrderText(product.name, 127),
             quantity: product.quantity,
-            description: product.description,
+            description: formatOrderText(product.description, 127),
             sku: product.product_id,
             unit_amount: {
               currency_code: currencyCode,
