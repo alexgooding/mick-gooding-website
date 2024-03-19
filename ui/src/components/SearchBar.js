@@ -27,6 +27,7 @@ const SearchBar = () => {
             id="header-search"
             placeholder="Search all items"
             name="name"
+            autoComplete="on"
             className="form-control"
             defaultValue={name}
             onChange={handleInputChange}
