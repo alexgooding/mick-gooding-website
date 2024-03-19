@@ -53,7 +53,7 @@ def test_create_db_connection_missing_env_variables(missing_env_variables):
     (
         {'PAYPAL_CLIENT_MODE': 'SANDBOX', 'PAYPAL_CLIENT_ID': 'test_client_id', 'PAYPAL_CLIENT_SECRET': 'test_client_secret'},
         {
-            'url': 'https://api-m.sandbox.paypal.com/v1/oauth2/token',
+            'url': 'example/path/v1/oauth2/token',
             'headers': {'Content-Type': 'application/x-www-form-urlencoded'},
             'data': {'grant_type': 'client_credentials'},
             'auth': ('test_client_id', 'test_client_secret')
@@ -69,7 +69,7 @@ def test_generate_paypal_access_token(paypal_env_variables, expected_post_params
             mock_post.return_value = mock_response
 
             # Call the function
-            result = generate_paypal_access_token()
+            result = generate_paypal_access_token("example/path")
 
             # Assert that the function returned the mocked access token
             assert result == 'mocked_access_token'
@@ -80,11 +80,10 @@ def test_generate_paypal_access_token(paypal_env_variables, expected_post_params
 @pytest.mark.parametrize("missing_env_variables", [
     {'PAYPAL_CLIENT_MODE': 'SANDBOX', 'PAYPAL_CLIENT_ID': 'test_client_id'},
     {'PAYPAL_CLIENT_MODE': 'SANDBOX', 'PAYPAL_CLIENT_SECRET': 'test_client_secret'},
-    {'PAYPAL_CLIENT_ID': 'test_client_id', 'PAYPAL_CLIENT_SECRET': 'test_client_secret'},
     {},
 ])
 def test_generate_paypal_access_token_missing_env_credentials(missing_env_variables):
     with patch.dict(os.environ, missing_env_variables):
         with pytest.raises(KeyError):
             # The following line should raise a KeyError since one or more PayPal credentials are missing
-            generate_paypal_access_token()
+            generate_paypal_access_token("example/path")

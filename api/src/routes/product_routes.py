@@ -1,5 +1,6 @@
-from flask import jsonify, request
-from flask_restx import Namespace, Resource, abort
+import requests
+from flask import jsonify, request, url_for, abort
+from flask_restx import Namespace, Resource
 from psycopg2.extras import RealDictCursor 
 
 from decorators import create_con_handle_exceptions
@@ -51,7 +52,7 @@ class Products(Resource):
 
         if not products:
             # Raise 404 error if no products are found
-            abort(404, message="No products found")
+            abort(404, "No products found")
 
         return jsonify(products)
 
@@ -59,7 +60,7 @@ class Products(Resource):
 class Product(Resource):
     @product_ns.response(200, "Success")
     @product_ns.response(401, "Invalid database credentials")
-    @product_ns.response(404, "Product not found")
+    @product_ns.response(404, "Product not found for product ID '<product_id>'")
     @product_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def get(self, product_id, conn):
@@ -74,7 +75,7 @@ class Product(Resource):
 
         if not product:
             # Raise 404 error if product is not found
-            abort(404, message="Product not found")
+            abort(404, f"Product not found for product ID '{product_id}'")
 
         return jsonify(product)
 
@@ -82,7 +83,7 @@ class Product(Resource):
 class ProductAllInfo(Resource):
     @product_ns.response(200, "Success")
     @product_ns.response(401, "Invalid database credentials")
-    @product_ns.response(404, "Product info not found")
+    @product_ns.response(404, "Product info not found for product ID '<product_id>'")
     @product_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def get(self, product_id, conn):
@@ -103,17 +104,30 @@ class ProductAllInfo(Resource):
 
         if not product_info:
             # Raise 404 error if product info is not found
-            abort(404, message="Product info not found")
+            abort(404, f"Product info not found for product ID '{product_id}'")
 
         return jsonify(product_info)
 
 @product_ns.route("/product/<int:product_id>/update-stock/<int:stock>")
 class ProductStockUpdate(Resource):
     @product_ns.response(200, "Success")
+    @product_ns.response(400, "Missing an order ID corresponding to a completed transaction")
     @product_ns.response(401, "Invalid database credentials")
     @product_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def put(self, product_id, stock, conn):
+        # Verify order exists and is complete before updating stock
+        response_json = {}
+        order_id = request.json.get('order_id')
+        if order_id:
+            order_endpoint_url = url_for("routes.paypal_routes_order", order_id=order_id, _external=True)
+            response = requests.get(order_endpoint_url)
+
+            response_json = response.json()
+
+        if response_json.get('status') != "COMPLETED":
+            abort(400, "Missing an order ID corresponding to a completed transaction")
+            
         query = """
             UPDATE products
             SET stock = %s
@@ -133,7 +147,7 @@ class ProductStockUpdate(Resource):
 class ProductStockGet(Resource):
     @product_ns.response(200, "Success")
     @product_ns.response(401, "Invalid database credentials")
-    @product_ns.response(404, "Product not found")
+    @product_ns.response(404, "Product not found for product ID '<product_id>'")
     @product_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def get(self, product_id, conn):
@@ -148,7 +162,7 @@ class ProductStockGet(Resource):
 
         if not stock:
             # Raise 404 error if product is not found
-            abort(404, message="Product not found")
+            abort(404, f"Product not found for product ID '{product_id}'")
 
 
         return jsonify(stock[0])

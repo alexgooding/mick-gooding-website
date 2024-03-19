@@ -60,8 +60,8 @@ const CartItem = ({ product }) => {
                 </b>
                 <span className="card-text d-flex flex-nowrap mb-1">{product.product_type}</span>
                 <div className="card-text d-flex mb-1">
-                  <label htmlFor="quantitySelect" className="me-2">Quantity:</label>
-                  <select id="quantitySelect" value={quantity} onChange={(e) => handleQuantityChange(parseInt(e.target.value))}>
+                  <label htmlFor={`quantitySelect_${product.product_id}`} className="me-2">Quantity:</label>
+                  <select id={`quantitySelect_${product.product_id}`} value={quantity} onChange={(e) => handleQuantityChange(parseInt(e.target.value))}>
                     {[...Array(product.stock + 1).keys()].map((value) => (
                       <option key={value} value={value}>
                         {value}

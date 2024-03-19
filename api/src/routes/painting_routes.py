@@ -1,5 +1,5 @@
-from flask import jsonify, request
-from flask_restx import Namespace, Resource, abort, reqparse
+from flask import jsonify, abort
+from flask_restx import Namespace, Resource, reqparse
 from psycopg2.extras import RealDictCursor 
 
 from decorators import create_con_handle_exceptions
@@ -51,7 +51,7 @@ class Paintings(Resource):
 
         if not paintings:
             # Raise 404 error if no paintings are found
-            abort(404, message="No paintings found")
+            abort(404, "No paintings found")
         
         return jsonify(paintings)
 
@@ -59,7 +59,7 @@ class Paintings(Resource):
 class PaintingProducts(Resource):
     @painting_ns.response(200, "Success")
     @painting_ns.response(401, "Invalid database credentials")
-    @painting_ns.response(404, "No products found for the specified painting")
+    @painting_ns.response(404, "No products found for painting ID '<painting_id>'")
     @painting_ns.response(500, "Internal Server Error")
     @create_con_handle_exceptions
     def get(self, painting_id, conn):
@@ -72,6 +72,6 @@ class PaintingProducts(Resource):
 
         if not products:
             # Raise 404 error if no products are found for the specified painting
-            abort(404, message="No products found for the specified painting")
+            abort(404, f"No products found for painting ID '{painting_id}'")
 
         return jsonify(products)

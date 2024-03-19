@@ -13,6 +13,7 @@ def app():
     app = Flask(__name__)
     app.testing = True
     app.config['SERVER_NAME'] = 'localhost'
+    app.config['RESTX_ERROR_404_HELP'] = False
 
     base_api.init_app(app)
     base_api.add_namespace(product_ns, path='/api')
@@ -70,7 +71,7 @@ def test_get_products_no_products_found(client):
     response = client.get('/api/products')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'No products found. You have requested this URI [/api/products] but did you mean /api/products or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': 'No products found'}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -102,7 +103,7 @@ def test_get_product_not_found(client):
     response = client.get('/api/product/1')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -134,7 +135,7 @@ def test_get_product_all_info_not_found(client):
     response = client.get('/api/product/1/all-info')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product info not found. You have requested this URI [/api/product/1/all-info] but did you mean /api/product/<int:product_id>/all-info or /api/product/<int:product_id>/update-stock/<int:stock> or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product info not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))
@@ -146,11 +147,40 @@ def test_get_product_all_info_internal_server_error(client):
 
 
 @mock_db_operations(data=None)
-def test_update_product_stock_success(client):
-    response = client.put('/api/product/1/update-stock/50')
+@patch('routes.product_routes.url_for')
+@patch('requests.get')
+def test_update_product_stock_success(mock_get, mock_url_for, client):
+    mock_get.return_value.status_code = 200
+    mock_get.return_value.json.return_value = {'status': "COMPLETED"}
+    data = {'order_id': 'example_id'}
+    response = client.put('/api/product/1/update-stock/50', json=data)
 
     assert response.status_code == 200
     assert response.json == {'message': 'Stock updated successfully for product ID 1'}
+
+
+@mock_db_operations(data=None)
+@patch('routes.product_routes.url_for')
+@patch('requests.get')
+def test_update_product_stock_missing_order_id(mock_get, mock_url_for, client):
+    data = {}
+    response = client.put('/api/product/1/update-stock/50', json=data)
+
+    assert response.status_code == 400
+    assert response.json == {'message': 'Missing an order ID corresponding to a completed transaction'}
+
+
+@mock_db_operations(data=None)
+@patch('routes.product_routes.url_for')
+@patch('requests.get')
+def test_update_product_stock_invalid_order_id(mock_get, mock_url_for, client):
+    mock_get.return_value.status_code = 404
+    mock_get.return_value.json.return_value = {}
+    data = {'order_id': "invalid_id"}
+    response = client.put('/api/product/1/update-stock/50', json=data)
+
+    assert response.status_code == 400
+    assert response.json == {'message': 'Missing an order ID corresponding to a completed transaction'}
 
 
 @mock_db_operations(data=None, exception=OperationalError('Invalid database credentials'))
@@ -189,7 +219,7 @@ def test_get_product_stock_not_found(client):
     response = client.get('/api/product/1')
 
     assert response.status_code == 404
-    assert response.json == {'message': 'Product not found. You have requested this URI [/api/product/1] but did you mean /api/product/<int:product_id>/update-stock/<int:stock> or /api/products or /api/product/<int:product_id>/stock ?'}
+    assert response.json == {'message': "Product not found for product ID '1'"}
 
 
 @mock_db_operations(data=None, exception=Exception("Test error"))

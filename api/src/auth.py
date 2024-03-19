@@ -3,10 +3,6 @@ import psycopg2
 import requests
 
 
-PAYPAL_SANDBOX_BASE_URL = "https://api-m.sandbox.paypal.com"
-PAYPAL_PRODUCTION_BASE_URL = "https://api-m.paypal.com"
-
-
 def create_db_connection():
     conn = psycopg2.connect(
         host="database",
@@ -18,9 +14,8 @@ def create_db_connection():
 
     return conn
 
-def generate_paypal_access_token():
-    base_url = PAYPAL_SANDBOX_BASE_URL if os.environ['PAYPAL_CLIENT_MODE'] == "SANDBOX" else PAYPAL_PRODUCTION_BASE_URL
-    url = f"{base_url}/v1/oauth2/token"
+def generate_paypal_access_token(paypal_base_url):
+    url = f"{paypal_base_url}/v1/oauth2/token"
     headers = {
         'Content-Type': "application/x-www-form-urlencoded"
     }

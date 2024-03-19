@@ -7,6 +7,8 @@ def create_app():
     app = create_base_app()
     api = create_api(app)
 
+    app.config['RESTX_ERROR_404_HELP'] = False
+
     return app
 
 def run_dev_server():
