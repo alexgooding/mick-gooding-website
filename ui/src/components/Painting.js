@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { PiPackageFill } from "react-icons/pi";
@@ -84,66 +85,75 @@ const Painting = () => {
   }, [products]);
 
   return (
-    <div className="container p-3">
-      <div className="row justify-content-md-center">
-        <div className="col col-12 col-md-8 col-xl-7 col-xxl-6 p-3">
-          <div className={`${fullScreen ? "full-screen" : "mt-auto"}`} onClick={toggleFullScreen}>
-            <img
-              src={highResImagePath}
-              alt={`Painting: ${painting.name}`}
-              className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
-            />
-          </div>
-        </div>
-        <div className="col col-12 col-md-4 p-3" style={{ "max-width": "450px" }}>
-          <div className="row mb-2">
-            <h2 className="px-1">{painting.name}</h2>
-          </div>
-          {
-          painting.description && 
-          <div className="row">
-            <p className="px-1">{painting.description}</p>
-          </div>
-          }
-          {
-          selectedProduct.description && 
-          <div className="row">
-            <p className="px-1">{selectedProduct.description}</p>
-          </div>
-          }
-          <div className="row mb-3">
-            <select 
-              id={`productDropdown_${painting.painting_id}`} 
-              onChange={handleSelect} 
-              onFocus={() => setDropDownFocused(true)} 
-              onBlur={() => setDropDownFocused(false)}
-            >
-              <option value="" disabled selected hidden>
-                Select a size
-              </option>
-              {products.map((product) => (
-                <option key={product.product_id} value={product.product_id} disabled={!product.stock}>
-                  {product.product_type} {dropDownFocused && `(£${parseFloat(product.price).toFixed(2)})`} {!product.stock && "[Sold out]"}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="row mb-3">
-            <div className="text-muted small icon-link px-1">
-              <PiPackageFill />
-              {/* Set line height to ensure alignment with icon */}
-              <span style={{ lineHeight: "1" }}>Delivery to United Kingdom only</span>
+    <div>
+      <Helmet>
+        <title>{painting.name}</title>
+        <meta
+          name="description"
+          content={painting.description}
+        />
+      </Helmet>
+      <div className="container p-3">
+        <div className="row justify-content-md-center">
+          <div className="col col-12 col-md-8 col-xl-7 col-xxl-6 p-3">
+            <div className={`${fullScreen ? "full-screen" : "mt-auto"}`} onClick={toggleFullScreen}>
+              <img
+                src={highResImagePath}
+                alt={`Painting: ${painting.name}`}
+                className={`${fullScreen ? "full-screen-image" : "painting-image zoom-in-pointer"}`}
+              />
             </div>
           </div>
-          <div className="row">
-            <button 
-              type="button" 
-              className="btn btn-outline-dark btn-sm" 
-              onClick={handleAddToCart}
-              disabled={!selectedProduct.stock}>
-                Add to basket {selectedProduct.price && `• £${parseFloat(selectedProduct.price).toFixed(2)}`} 
-            </button>
-          </div> 
+          <div className="col col-12 col-md-4 p-3" style={{ "max-width": "450px" }}>
+            <div className="row mb-2">
+              <h2 className="px-1">{painting.name}</h2>
+            </div>
+            {
+            painting.description && 
+            <div className="row">
+              <p className="px-1">{painting.description}</p>
+            </div>
+            }
+            {
+            selectedProduct.description && 
+            <div className="row">
+              <p className="px-1">{selectedProduct.description}</p>
+            </div>
+            }
+            <div className="row mb-3">
+              <select 
+                id={`productDropdown_${painting.painting_id}`} 
+                onChange={handleSelect} 
+                onFocus={() => setDropDownFocused(true)} 
+                onBlur={() => setDropDownFocused(false)}
+              >
+                <option value="" disabled selected hidden>
+                  Select a size
+                </option>
+                {products.map((product) => (
+                  <option key={product.product_id} value={product.product_id} disabled={!product.stock}>
+                    {product.product_type} {dropDownFocused && `(£${parseFloat(product.price).toFixed(2)})`} {!product.stock && "[Sold out]"}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="row mb-3">
+              <div className="text-muted small icon-link px-1">
+                <PiPackageFill />
+                {/* Set line height to ensure alignment with icon */}
+                <span style={{ lineHeight: "1" }}>Delivery to United Kingdom only</span>
+              </div>
+            </div>
+            <div className="row">
+              <button 
+                type="button" 
+                className="btn btn-outline-dark btn-sm" 
+                onClick={handleAddToCart}
+                disabled={!selectedProduct.stock}>
+                  Add to basket {selectedProduct.price && `• £${parseFloat(selectedProduct.price).toFixed(2)}`} 
+              </button>
+            </div> 
+          </div>
         </div>
       </div>
     </div>
