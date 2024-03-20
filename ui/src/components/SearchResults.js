@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
@@ -91,21 +92,30 @@ const SearchResults = () => {
   }, [name]);
 
   return (
-    <div className="container p-3 mb-3">
-      <div className="d-flex justify-content-center mb-3">
-        <SearchBar />
-      </div>
-      <div className="d-flex justify-content-center mb-3">
-        <span>
-          {resultsText}
-        </span>
-      </div>
-      <div className="row row-cols-auto">
-        {paintings.map((painting) => (
-          <div key={painting.painting_id} className="col m-auto">
-            <SearchResultsItem painting={painting} />
-          </div>
-        ))}
+    <div>
+      <Helmet>
+        <title>Store</title>
+        <meta
+          name="description"
+          content="The Mick Gooding store. Browser all of the available artwork, or search by subject name."
+        />
+      </Helmet>
+      <div className="container p-3 mb-3">
+        <div className="d-flex justify-content-center mb-3">
+          <SearchBar />
+        </div>
+        <div className="d-flex justify-content-center mb-3">
+          <span>
+            {resultsText}
+          </span>
+        </div>
+        <div className="row row-cols-auto">
+          {paintings.map((painting) => (
+            <div key={painting.painting_id} className="col m-auto">
+              <SearchResultsItem painting={painting} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
