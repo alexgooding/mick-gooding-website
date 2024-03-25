@@ -110,6 +110,7 @@ const PaymentButtons = ({ cartData }) => {
   const onError = (err) => {
     navigate("/cart");
     console.log(`The following error occured: ${err}`);
+    alert("There was an issue with your payment, please try again.");
   }
 
   const onShippingAddressChange = (data, actions) => {
