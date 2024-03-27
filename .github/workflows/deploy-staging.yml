@@ -24,4 +24,6 @@ jobs:
             docker compose -f compose-prod.yml pull
             docker compose -f compose-prod.yml down
             docker compose -f compose-prod.yml --env-file .env up -d --force-recreate
+            docker exec mick-gooding-website-frontend-1 /bin/sh -c "sed -i 's/AbA0gHkv0_OD-bbsCb0I1EJtJFQJkKEuvL5fwo2KQyvFZ3yqnDpVKAC3MBrRS7OvT8_RpDIut_8qX80y/test/g' /usr/share/nginx/html/static/js/main.*.js"
             unset DOCKER_TAG
+            docker system prune -f
