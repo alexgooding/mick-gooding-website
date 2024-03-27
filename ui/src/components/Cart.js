@@ -46,6 +46,11 @@ const Cart = () => {
 
     // Fetch products on initial render
     fetchProducts();
+    // Display alert if an item went out of stock during payment
+    if (sessionStorage.outOfStockAlert == "true") {
+      alert("An item in your basket is no longer in stock. Please checkout again.");
+      sessionStorage.outOfStockAlert = false;
+    };
   }, [getAllProductIds]);
 
   return (
