@@ -37,16 +37,22 @@ const PaymentButtons = ({ cartData }) => {
   const { clearCart } = useCart();
   const navigate = useNavigate(); 
 
-  const createOrder = async (data) => {
-
+  const stockCheck = async () => {
     // Check that all products in the cart are still in stock before proceeding with payment
     for (let product of cartData) {
       let response = await client.get(`/product/${product.product_id}/stock`);
-      let currentStock = response.data;
-      if (currentStock < product.quantity) {
+      // Update product stock with most recent stock data
+      product.stock = response.data;
+      if (product.stock < product.quantity) {
+        sessionStorage.outOfStockAlert = true;
         window.location.reload();
       };
     };
+  };
+
+  const createOrder = async (data) => {
+
+    stockCheck();
 
     const cartTotal = cartData.reduce((sum, product) => {
       return sum + product.price * product.quantity;
@@ -90,6 +96,7 @@ const PaymentButtons = ({ cartData }) => {
   };
 
   const onApprove = async (data) => {
+    stockCheck();
     return await client.post(`/paypal/orders/${data.orderID}/capture`)
     .then((res) => {
       // Update stock for purchased products in the DB
