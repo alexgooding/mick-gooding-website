@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 import OrderConfirmationItem from "./OrderConfirmationItem";
@@ -19,6 +19,7 @@ const OrderConfirmation = () => {
   const { orderId } = useParams();
   const [orderData, setOrderData] = useState(null);
   const [products, setProducts] = useState([]);
+  const navigate = useNavigate(); 
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -28,6 +29,8 @@ const OrderConfirmation = () => {
         return response.data;
       } catch (error) {
         console.error("Error fetching order data:", error);
+        // Navigate back home if order cannot be found
+        navigate("/");
       }
     };
 
