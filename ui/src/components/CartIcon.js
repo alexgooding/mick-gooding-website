@@ -7,7 +7,7 @@ const CartIcon = props => {
   return (
     <div className="shopping-cart-container">
       <span className="quantity-badge position-absolute start-50 translate-middle badge rounded-pill">{props.value}</span>
-      <CiShoppingBasket className="shopping-cart-icon"/>
+      <CiShoppingBasket className="shopping-cart-icon" role="img" aria-label="Shopping cart icon"/>
     </div>
   );
 };
