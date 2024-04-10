@@ -64,7 +64,9 @@ const About = () => {
           <Col md={6} className="p-3" style={{ maxWidth: 615 }}>
             <Row>
               <Col className="ps-0 pt-0 pe-2 pb-2">
-                <Carousel 
+                <Carousel
+                  role="region"
+                  aria-label="Carousel" 
                   id="aboutCarousel1" 
                   className="slide carousel-fade mx-auto w-100" 
                   data-bs-ride="carousel"
@@ -98,7 +100,9 @@ const About = () => {
                 </Carousel>
               </Col>
               <Col className="ps-2 pt-0 pe-0 pb-2">
-                <Carousel 
+                <Carousel
+                  role="region"
+                  aria-label="Carousel"  
                   id="aboutCarousel2"
                   className="slide carousel-fade mx-auto w-100" 
                   data-bs-ride="carousel"
@@ -134,7 +138,9 @@ const About = () => {
             </Row>
             <Row className="mb-2">
               <Col className="ps-0 pt-2 pe-2 pb-0">
-                <Carousel 
+                <Carousel
+                  role="region"
+                  aria-label="Carousel"  
                   id="aboutCarousel3"
                   className="slide carousel-fade mx-auto w-100" 
                   data-bs-ride="carousel"
@@ -168,7 +174,9 @@ const About = () => {
                 </Carousel>
               </Col>
               <Col className="ps-2 pt-2 pe-0 pb-0">
-                <Carousel 
+                <Carousel
+                  role="region"
+                  aria-label="Carousel"  
                   id="aboutCarousel4"
                   className="slide carousel-fade mx-auto w-100" 
                   data-bs-ride="carousel"
