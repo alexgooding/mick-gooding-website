@@ -217,19 +217,19 @@ const About = () => {
             </Row>
             <Row>
               <a className="col col-auto px-1 icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
-                <FaInstagram />
+                <FaInstagram aria-label="Instagram icon" />
                 micksbestart
               </a>
             </Row>
             <Row>
               <a className="col col-auto px-1 icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
-                <FaFacebook />
+                <FaFacebook aria-label="Facebook icon" />
                 micksart
               </a>
             </Row>
             <Row>
               <a className="col col-auto px-1 icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
-                <MdOutlineEmail />
+                <MdOutlineEmail aria-label="Mail icon" />
                 contact@mickgooding.co.uk
               </a>
             </Row>

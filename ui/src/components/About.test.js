@@ -9,21 +9,6 @@ describe('About component', () => {
     expect(screen.getByText('About')).toBeInTheDocument();
   });
 
-  test('displays the expected links', () => {
-    render(<About />);
-    expect(screen.getByRole('link', { name: 'micksbestart' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'micksart' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'contact@mickgooding.co.uk' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'Etsy' })).toBeInTheDocument();
-  });
-
-  test('renders the carousels correctly', () => {
-    render(<About />); 
-    const carousels = screen.getAllByRole('region', { name: 'Carousel' })
-    expect(carousels).toHaveLength(4);   
-    expect(screen.getAllByRole('img')).toHaveLength(16);
-  });
-
   test('sets the correct Helmet metadata', () => {
     render(<About />);
     const helmet = Helmet.peek();
@@ -34,5 +19,20 @@ describe('About component', () => {
         content: 'About the artist. Read about Mick Gooding\'s history and influences. View photos of him and notable artists he has met.',
       })
     );
+  });
+
+  test('displays the expected links', () => {
+    render(<About />);
+    expect(screen.getByRole('link', { name: 'Mail icon contact@mickgooding.co.uk', href: 'mailto:contact@mickgooding.co.uk' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Instagram icon micksbestart', href: 'https://www.instagram.com/micksbestart' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Facebook icon micksart', href: 'https://facebook.com/micksart' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: 'Etsy', href: 'https://www.etsy.com/shop/MickGoodingCanvasArt' })).toBeInTheDocument();
+  });
+
+  test('renders the carousels correctly', () => {
+    render(<About />); 
+    const carousels = screen.getAllByRole('region', { name: 'Carousel' })
+    expect(carousels).toHaveLength(4);   
+    expect(screen.getAllByRole('img')).toHaveLength(16);
   });
 });

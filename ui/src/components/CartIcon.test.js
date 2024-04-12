@@ -15,7 +15,6 @@ describe('CartIcon component', () => {
 
   test('renders the CiShoppingBasket component', () => {
     render(<CartIcon value={1} />);
-    screen.debug();
     expect(screen.getByRole('img', { name: 'Shopping cart icon' })).toBeInstanceOf(SVGSVGElement);
   });
 });

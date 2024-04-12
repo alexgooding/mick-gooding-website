@@ -15,7 +15,7 @@ const Contact = () => {
           content="Contains information about the prints sold, Instagram, Facebook and email contact links."
         />
       </Helmet>
-      <div className="container p-3 mb-3" style={{ "max-width": "960px" }}>
+      <div className="container p-3 mb-3" style={{ maxWidth: "960px" }}>
         <div className="row">
           <div className="col col-12 p-3">
             <h2>Choose your print</h2>
@@ -44,19 +44,19 @@ const Contact = () => {
         </div>
         <div className="row">
           <a className="col col-auto px-3 icon-link social-handle" href="mailto:contact@mickgooding.co.uk" target="_blank" rel="noreferrer">
-            <MdOutlineEmail />
+            <MdOutlineEmail aria-label="Mail icon" />
             contact@mickgooding.co.uk
           </a>
         </div>
         <div className="row">
           <a className="col col-auto px-3 icon-link social-handle" href="https://www.instagram.com/micksbestart" target="_blank" rel="noreferrer">
-            <FaInstagram />
+            <FaInstagram aria-label="Instagram icon" />
             micksbestart
           </a>
         </div>
         <div className="row">
           <a className="col col-auto px-3 icon-link social-handle" href="https://facebook.com/micksart" target="_blank" rel="noreferrer">
-            <FaFacebook />
+            <FaFacebook aria-label="Facebook icon" />
             micksart
           </a>
         </div>
