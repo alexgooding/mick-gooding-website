@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import Home from './Home';
-import PaintingGallery from './PaintingGallery';
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
