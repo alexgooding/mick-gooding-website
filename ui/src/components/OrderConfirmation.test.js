@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import OrderConfirmation from './OrderConfirmation';
 
