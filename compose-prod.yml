@@ -59,6 +59,9 @@ services:
       - type: bind
         source: ${SSL_PRIVATE_KEY_PATH}
         target: /etc/nginx/private/mgw_ssl_private_key.key
+      - type: bind
+        source: ./certbot-www
+        target: /var/www/certbot
     restart: always
 
 volumes:
